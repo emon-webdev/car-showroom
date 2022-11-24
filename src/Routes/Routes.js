@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdvertisedItems from "../components/AdvertisedItems";
+import Blogs from "../components/Blogs";
 
 
 import ErrorPage from "../components/ErrorPage";
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/advertise",
+        element: <AdvertisedItems/>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs/>,
       },
       {
         path:'/signin',
