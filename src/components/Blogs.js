@@ -3,16 +3,16 @@ import React from "react";
 const Blogs = () => {
   return (
     <div className="md:w-11/12 px-4 md:px-0 mx-auto my-14">
-      <h2 class="text-center my-8 text-[#232F4B] text-5xl font-bold ">Faq</h2>
+      <h2 className="text-center my-8 text-[#232F4B] text-5xl font-bold ">Faq</h2>
       <div
-        tabindex="0"
-        class="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+        tabIndex="0"
+        className="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
       >
-        <div class="collapse-title text-xl font-medium">
+        <div className="collapse-title text-xl font-medium">
           1. What are the different ways to manage a state in a React
           application?
         </div>
-        <div class="collapse-content">
+        <div className="collapse-content">
           <p>
             Every React component has a built-in state. This state is an object
             which stores the property values that belong to a component. State
@@ -22,13 +22,13 @@ const Blogs = () => {
         </div>
       </div>
       <div
-        tabindex="0"
-        class="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+        tabIndex="0"
+        className="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
       >
-        <div class="collapse-title text-xl font-medium">
+        <div className="collapse-title text-xl font-medium">
           2. How does prototypical inheritance work?
         </div>
-        <div class="collapse-content">
+        <div className="collapse-content">
           <p>
             The Prototypal Inheritance is a feature in javascript used to add
             methods and properties in objects. It is a method by which an object
@@ -37,13 +37,13 @@ const Blogs = () => {
         </div>
       </div>
       <div
-        tabindex="0"
-        class="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+        tabIndex="0"
+        className="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
       >
-        <div class="collapse-title text-xl font-medium">
+        <div className="collapse-title text-xl font-medium">
           3. What is a unit test? Why should we write unit tests?
         </div>
-        <div class="collapse-content">
+        <div className="collapse-content">
           <p>
             Unit test: Unit Testing is a type of software testing where
             individual units or components of a software are tested.
@@ -57,14 +57,14 @@ const Blogs = () => {
         </div>
       </div>
       <div
-        tabindex="0"
-        class="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+        tabIndex="0"
+        className="collapse mb-6 collapse-arrow border border-base-300 bg-base-100 rounded-box"
       >
-        <div class="collapse-title text-xl font-medium">
+        <div className="collapse-title text-xl font-medium">
           4. React vs. Angular vs. Vue?
         </div>
-        <div class="collapse-content">
-          <h2 class="text-3xl">React</h2>
+        <div className="collapse-content">
+          <h2 className="text-3xl">React</h2>
           <ol>
             <li>
               {" "}
@@ -75,7 +75,7 @@ const Blogs = () => {
             <li>Migration between versions is effortless. </li>
             <li> Best choice for cross-platform and mobile apps.</li>
           </ol>
-          <h2 class="text-3xl">Angular</h2>
+          <h2 className="text-3xl">Angular</h2>
           <ol>
             <li>Angular uses HTML and CSS. </li>
             <li>
@@ -86,7 +86,7 @@ const Blogs = () => {
             <li>Google long term support available. </li>
             <li>Best choice for TS and OOP lovers. </li>
           </ol>
-          <h2 class="text-3xl">Vue</h2>
+          <h2 className="text-3xl">Vue</h2>
           <ol>
             <li>
               {" "}

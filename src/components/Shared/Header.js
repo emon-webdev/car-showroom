@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
-  //   const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
-  //   const handleLogOut = () => {
-  //     logOut()
-  //       .then(() => {})
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-  //   };
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const menuItems = (
     <>
@@ -23,16 +24,27 @@ const Header = () => {
       <li>
         <Link to="/blogs">Blogs</Link>
       </li>
-      <li>
-        <button>Sign Out</button>
-      </li>
-      
-      <li>
-        <Link to="/signin">Sign In</Link>
-      </li>
-      <li>
-        <Link to="/signup">Sign Up</Link>
-      </li>
+      {user ? (
+        <>
+          <li>
+            <button onClick={handleLogOut}>Sign Out</button>
+          </li>
+          <li>
+            <div className="w-12 rounded-full p-2">
+              <img src={user?.photoURL} alt={user?.displayName.slice(0, 4)} />
+            </div>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/signin">Sign In</Link>
+          </li>
+          <li>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -64,8 +76,8 @@ const Header = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            Car Showroom
+          <Link to="/" className="btn btn-ghost normal-case text-2xl">
+            Car <span className="text-[#e0c83d] ml-2">Showroom</span>
           </Link>
         </div>
         <div className="navbar-center hidden md:flex">

@@ -11,9 +11,9 @@ const Banner = () => {
         <div className="max-w-xl">
           <h1 className="mb-5 text-4xl font-medium">Get Your service</h1>
           <p className="mb-5 text-6xl font-bold">
-            Car and Bike Resell Here.
+            Car and Bike Resale Here.
           </p>
-          <button className="btn btn-outline btn-secondary">Click Here</button>
+          <button className="btn btn-warning">Click Here</button>
         </div>
       </div>
     </div>

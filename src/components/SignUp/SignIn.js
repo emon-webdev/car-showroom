@@ -1,14 +1,55 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 const SignIn = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { signIn, googleLogin } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const [loginUserDetails, setLoginUserDetails] = useState("");
+  // call location
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+ //handle google sign in
+ const handleGoogleSignIn = () => {
+  console.log("google sign in");
+  googleLogin()
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      navigate(from, { replace: true });
+      toast.success("Sign In Successfully");
+    })
+    .catch((err) => {
+      const errorMessage = err.message;
+      setLoginError(errorMessage);
+      console.log(err);
+    });
+};
 
 
+  const handleLogin = (data) => {
+    console.log(data);
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setLoginUserDetails(data.email);
+        toast.success("Sign in Successfully");
+        navigate(from, { replace: true });
+      })
+      .then((error) => {
+        console.log(error.message);
+        setLoginError(error.message);
+      });
+  };
 
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -20,7 +61,7 @@ const SignIn = () => {
         }}
       >
         <h2 className="text-4xl mb-8 font-medium text-center">Sign In</h2>
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full mb-2">
             <label className="label py-1">
               {" "}
@@ -35,6 +76,9 @@ const SignIn = () => {
             />
             {errors.email && (
               <p className="text-red-600">{errors.email?.message}</p>
+            )}
+            {loginError.email && (
+              <p className="text-red-600">{loginError.email?.message}</p>
             )}
           </div>
           <div className="form-control w-full mb-2">
@@ -80,7 +124,7 @@ const SignIn = () => {
           <div className="divider">OR</div>
 
           <div>
-            <button className="btn btn-outline w-full">
+            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
               CONTINUE WITH GOOGLE
             </button>
           </div>
