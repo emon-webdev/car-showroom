@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -16,10 +17,10 @@ const AddProduct = () => {
 
   const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
 
-  // const currentDate = new Date();
-  // const time = currentDate.getHours() + ":" + currentDate.getMinutes();
-  // const date = format(currentDate, "PP");
-  const date = new Date();
+  const currentDate = new Date();
+  const time = currentDate.getHours() + ":" + currentDate.getMinutes();
+  const date = format(currentDate, "PP");
+  // const date = new Date();
 
   const handleAddProduct = (data) => {
     console.log(data);
@@ -38,6 +39,7 @@ const AddProduct = () => {
           console.log(imgData.data.url);
           const products = {
             date,
+            time,
             sellerName: user?.displayName,
             email: user?.email,
             title: data.title,
