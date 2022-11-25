@@ -24,6 +24,9 @@ const Header = () => {
       <li>
         <Link to="/blogs">Blogs</Link>
       </li>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
       {user ? (
         <>
           <li>
@@ -31,7 +34,7 @@ const Header = () => {
           </li>
           <li>
             <div className="w-12 rounded-full p-2">
-              <img src={user?.photoURL} alt={user?.displayName.slice(0, 4)} />
+              <img src={user?.photoURL} alt='' />
             </div>
           </li>
         </>

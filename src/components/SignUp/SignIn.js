@@ -12,6 +12,7 @@ const SignIn = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserDetails, setLoginUserDetails] = useState("");
+  console.log(loginUserDetails)
   // call location
   const navigate = useNavigate();
   const location = useLocation();
