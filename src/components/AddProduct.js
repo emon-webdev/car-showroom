@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../contexts/AuthProvider";
 
-
 const AddProduct = () => {
   // date: new Date()
   const {
@@ -21,6 +20,7 @@ const AddProduct = () => {
   const time = currentDate.getHours() + ":" + currentDate.getMinutes();
   const date = format(currentDate, "PP");
   // const date = new Date();
+  const categories = ["toyota", "lexus", "bmw"];
 
   const handleAddProduct = (data) => {
     console.log(data);
@@ -43,7 +43,11 @@ const AddProduct = () => {
             sellerName: user?.displayName,
             email: user?.email,
             title: data.title,
+            number: data.number,
+            relevantInfo: data.relevantInfo,
+
             category: data.category,
+
             resalePrice: data.resalePrice,
             originalPrice: data.price,
             uses: data.uses,
@@ -64,7 +68,7 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
-              toast.success(`${data.name} is added successfully`);
+              toast.success(`Product added successfully`);
             });
         }
       });
@@ -107,9 +111,11 @@ const AddProduct = () => {
                   })}
                   className="select select-bordered w-full"
                 >
-                  <option value="bmw">BMW</option>
-                  <option value="lexus">LEXUS</option>
-                  <option value="toyota">TOYOTA</option>
+                  {categories.map((category, i) => (
+                    <option key={i} defaultValue={category}>
+                      {category}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -139,6 +145,38 @@ const AddProduct = () => {
                 <input
                   type="text"
                   {...register("price", {
+                    required: "Price is required",
+                  })}
+                  className="input input-bordered w-full"
+                />
+              </div>
+            </div>
+            <div className="md:flex items-start justify-between">
+              <div className="form-control w-full md:mr-3 mb-2">
+                <label className="label py-1">
+                  {" "}
+                  <span className="label-text font-semibold text-[#383838] mb-[10px] text-[14px]">
+                    Mobile Number
+                  </span>
+                </label>
+                <input
+                  type="number"
+                  {...register("number", {
+                    required: "Number is required",
+                  })}
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control w-full mb-4">
+                <label className="label py-1">
+                  {" "}
+                  <span className="label-text font-semibold mb-[10px] text-[#383838] text-[14px]">
+                    Relevant Information
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  {...register("relevantInfo", {
                     required: "Price is required",
                   })}
                   className="input input-bordered w-full"

@@ -22,6 +22,9 @@ const Header = () => {
         <Link to="/advertise">Advertised Items</Link>
       </li>
       <li>
+        <Link to="/myProducts">My Products</Link>
+      </li>
+      <li>
         <Link to="/blogs">Blogs</Link>
       </li>
       <li>

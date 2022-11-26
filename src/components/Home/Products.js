@@ -1,18 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const Products = () => {
 
 
-  const { data: products = [] } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/products`);
-      const data = await res.json();
-      return data;
-    },
-  });
-console.log(products)
+  // const categories = [{ category: 'iphone' }, { category: 'xiaomi' }, { category: 'oppo' }]
 
   return (
     <div className="my-12">

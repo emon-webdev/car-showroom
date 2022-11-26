@@ -7,8 +7,10 @@ import Blogs from "../components/Blogs";
 
 
 import ErrorPage from "../components/ErrorPage";
+import CategoryProducts from "../components/Home/CategoryProducts";
 import Home from "../components/Home/Home";
 import MyOrders from "../components/MyOrders";
+import MyProducts from "../components/MyProducts";
 import MyWishList from "../components/MyWishList";
 import ReportedItems from "../components/ReportedItems";
 import SignIn from "../components/SignUp/SignIn";
@@ -25,10 +27,22 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        
       },
+      
+      {
+        path: "/category/:id",
+        element: <CategoryProducts/>,
+        loader:({params}) => fetch (`http://localhost:5000/category/${params.id}`)
+      },
+
       {
         path: "/advertise",
         element: <AdvertisedItems/>,
+      },
+      {
+        path: "/myProducts",
+        element: <MyProducts/>,
       },
       {
         path: "/blogs",
