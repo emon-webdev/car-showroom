@@ -157,7 +157,6 @@ const SignUp = () => {
             >
               <option defaultValue="seller">Seller</option>
               <option value="buyer">Buyer</option>
-              <option value="admin">Admin</option>
             </select>
 
             <small className="text-danger">

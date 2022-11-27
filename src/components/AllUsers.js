@@ -1,17 +1,57 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../contexts/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { toast } from "react-hot-toast";
 
 const AllUsers = () => {
-  const { user } = useContext(AuthContext);
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allSeller"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/users`);
+      const data = await res.json();
+      return data;
+    },
+  });
 
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:5000/users").then((res) => {
-      setUsers(res.data);
-    });
-  }, []);
-  console.log(users);
+  if (isLoading) {
+    return (
+      <div className="h-[800px] flex justify-center items-center">
+        <div className="w-16 text-center h-16 border-4 border-dashed rounded-full animate-spin border-violet-800"></div>
+      </div>
+    );
+  }
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success("Delete User");
+        }
+      });
+  };
+
+  const handleAdmin = (id) => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ role: "admin" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        refetch();
+        toast.success("Added Admin");
+      });
+  };
 
   return (
     <div>
@@ -27,6 +67,8 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Make Admin</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +79,31 @@ const AllUsers = () => {
 
                 <td>{singleUser?.email}</td>
                 <td>{singleUser?.role}</td>
+                <td>
+                  {singleUser?.role === "admin" ? (
+                    <button
+                      onClick={() => handleAdmin(singleUser._id)}
+                      className="btn btn-error btn-xs"
+                    >
+                      Admin
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleAdmin(singleUser._id)}
+                      className="btn btn-error btn-xs"
+                    >
+                      Make Admin
+                    </button>
+                  )}
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(singleUser._id)}
+                    className="btn btn-error btn-xs"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

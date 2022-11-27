@@ -18,7 +18,7 @@ const MyProducts = () => {
       const res = await fetch(
         `http://localhost:5000/products?email=${user?.email}`
       );
-      const data = await res.json();
+      const data = res.json();
       return data;
     },
   });
@@ -29,7 +29,6 @@ const MyProducts = () => {
 
   //delete product
   const handleDelete = (product) => {
-    console.log(product);
     fetch(`http://localhost:5000/products/${product._id}`, {
       method: "DELETE",
     })

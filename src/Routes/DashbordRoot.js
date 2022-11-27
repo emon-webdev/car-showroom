@@ -24,16 +24,17 @@ const DashbordRoot = () => {
               <Link to="/dashboard">Add Product</Link>
             </li>
             <li>
-              <Link to="/dashboard/allSeller">All Seller</Link>
-            </li>
-            <li>
               <Link to="/dashboard/allUsers">All Users</Link>
             </li>
             <li>
-              <Link to="/dashboard/myOrders">My Orders</Link>
+              <Link to="/dashboard/allBuyer">All Buyers</Link>
             </li>
             <li>
-              <Link to="/dashboard/myWishList">My WishList</Link>
+              <Link to="/dashboard/allSeller">All Sellers</Link>
+            </li>
+            
+            <li>
+              <Link to="/dashboard/myOrders">My Orders</Link>
             </li>
             <li>
               <Link to="/dashboard/reportedItem">Reported Items</Link>

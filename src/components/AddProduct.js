@@ -42,6 +42,9 @@ const AddProduct = () => {
             time,
             sellerName: user?.displayName,
             email: user?.email,
+            sellerImg:user?.photoURL,
+
+
             title: data.title,
             number: data.number,
             relevantInfo: data.relevantInfo,

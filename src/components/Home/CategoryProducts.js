@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { useLoaderData, useNavigation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Loading from "../Loading";
@@ -11,11 +13,25 @@ const CategoryProducts = () => {
   const navigation = useNavigation();
   console.log(bookingData);
 
-  
-
   if (navigation.state === "loading") {
     return <Loading></Loading>;
   }
+
+  const handleReport = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ report: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Added advertise");
+      });
+  };
 
   return (
     <div className="mb-12">
@@ -32,6 +48,23 @@ const CategoryProducts = () => {
               <img src={categoryProduct.img} alt="Shoes" />
             </figure>
             <div className="card-body">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="avatar">
+                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={categoryProduct?.sellerImg} alt="img" />
+                    </div>
+                    {categoryProduct.verifyUser && (
+                      <BsCheckCircleFill className="text-green-500 text-xl " />
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <p>Seller Name: {categoryProduct.sellerName} </p>
+                  <p>Email: {categoryProduct.email} </p>
+                </div>
+              </div>
+
               <h2 className="card-title">Name: {categoryProduct.title}</h2>
               <h2 className="card-title">
                 Category: {categoryProduct.category}
@@ -40,21 +73,25 @@ const CategoryProducts = () => {
                 Date: {categoryProduct.date} Time: {categoryProduct.time}
               </p>
               <p>Date: {categoryProduct.location}</p>
-              <p>Seller Name: {categoryProduct.sellerName} </p>
-              <p>Email: {categoryProduct.email} </p>
+
               <p>Original Price: {categoryProduct.originalPrice}</p>
               <p>Resale Price: {categoryProduct.resalePrice}</p>
               <p>Use: {categoryProduct.uses} year/month</p>
               <p>status: {categoryProduct.status}</p>
               <p>Relevant Info: {categoryProduct.relevantInfo}</p>
               <p>{categoryProduct.description}</p>
-              <div className="card-actions">
+              <div className="card-actions justify-between">
+                <button
+                  onClick={() => handleReport(categoryProduct._id)}
+                  className="btn btn-primary"
+                >
+                  Report
+                </button>
                 <label
                   htmlFor="my-modal"
                   onClick={() => setBookingData(categoryProduct)}
                   className="btn btn-primary"
                 >
-                  {" "}
                   Book Now
                 </label>
               </div>
@@ -63,10 +100,7 @@ const CategoryProducts = () => {
         ))}
       </div>
       {/* MOdal */}
-      <BookModal
-        user={user}
-        bookingData={bookingData}
-      />
+      <BookModal user={user} bookingData={bookingData} />
     </div>
   );
 };
