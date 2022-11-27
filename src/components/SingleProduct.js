@@ -1,7 +1,6 @@
 import React from "react";
 
 const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
-  console.log(product);
   const {img, description, price,title , status} = product;
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
@@ -18,7 +17,7 @@ const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
         </h2>
         <p>{description}</p>
         <div className="card-actions">
-          <button onClick={() => addAdvertise(product)} className="badge badge-outline">Advertise</button>
+          <button  onClick={() => addAdvertise(product)} className="badge badge-outline">Advertise</button>
           <button onClick={() => handleDelete(product)} className="badge badge-outline">Delete</button>
         </div>
       </div>
@@ -27,3 +26,4 @@ const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
 };
 
 export default SingleProduct;
+

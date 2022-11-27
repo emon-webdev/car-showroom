@@ -4,7 +4,7 @@ const AdvertisedItems = ({advertise}) => {
     console.log(advertise)
     return (
         <div>
-            <h2>Advertised Items</h2>
+            <h2>Advertised Items {advertise.length}</h2>
         </div>
     );
 };
