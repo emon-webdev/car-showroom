@@ -5,6 +5,7 @@ const AdvertisedItems = ({advertise}) => {
     return (
         <div>
             <h2>Advertised Items {advertise.length}</h2>
+            
         </div>
     );
 };

@@ -3,11 +3,7 @@ import React from "react";
 import AdvertisedItems from "./AdvertisedItems";
 
 const Advertise = () => {
-  const {
-    data: advertises = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: advertises = [] } = useQuery({
     queryKey: ["addProducts"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/advertises`);
@@ -21,7 +17,7 @@ const Advertise = () => {
 
   return (
     <div className="max-w-[1400px] mx-auto">
-      {advertises?.length > 0? (
+      {advertises?.length > 0 ? (
         <>
           <h1 className="text-5xl my-8 font-bold text-center">
             <span className="text-[#e0c83d]">Advertise Items</span>

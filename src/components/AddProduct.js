@@ -220,7 +220,7 @@ const AddProduct = () => {
                 <label className="label py-1">
                   {" "}
                   <span className="label-text font-semibold text-[#383838] mb-[10px] text-[14px]">
-                    Status
+                    Condition
                   </span>
                 </label>
                 <input

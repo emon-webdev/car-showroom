@@ -1,16 +1,24 @@
 import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import Loading from "../Loading";
+import BookModal from "./BookModal";
 
 const CategoryProducts = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const categoryProducts = useLoaderData();
   const [bookingData, setBookingData] = useState(null);
-
+  const navigation = useNavigation();
   console.log(bookingData);
 
+  
+
+  if (navigation.state === "loading") {
+    return <Loading></Loading>;
+  }
+
   return (
-    <div>
+    <div className="mb-12">
       <h1 className="text-5xl my-8 font-bold text-center">
         <span className="text-[#e0c83d]">Item Wise Same Category Products</span>
       </h1>
@@ -32,21 +40,22 @@ const CategoryProducts = () => {
                 Date: {categoryProduct.date} Time: {categoryProduct.time}
               </p>
               <p>Date: {categoryProduct.location}</p>
-              <p>Seller Name: {categoryProduct.sellerName}</p>
-              <p>Email: {categoryProduct.email}</p>
+              <p>Seller Name: {categoryProduct.sellerName} </p>
+              <p>Email: {categoryProduct.email} </p>
               <p>Original Price: {categoryProduct.originalPrice}</p>
               <p>Resale Price: {categoryProduct.resalePrice}</p>
-              <p>Use: {categoryProduct.uses}</p>
+              <p>Use: {categoryProduct.uses} year/month</p>
               <p>status: {categoryProduct.status}</p>
               <p>Relevant Info: {categoryProduct.relevantInfo}</p>
               <p>{categoryProduct.description}</p>
               <div className="card-actions">
                 <label
-                  htmlFor="my-modal-3"
+                  htmlFor="my-modal"
                   onClick={() => setBookingData(categoryProduct)}
                   className="btn btn-primary"
                 >
-                  Booking Now
+                  {" "}
+                  Book Now
                 </label>
               </div>
             </div>
@@ -54,23 +63,10 @@ const CategoryProducts = () => {
         ))}
       </div>
       {/* MOdal */}
-      {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box relative">
-          <label
-            htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <h3 className="text-lg font-bold">{/* {bookingData.title} */}</h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
-        </div>
-      </div>
+      <BookModal
+        user={user}
+        bookingData={bookingData}
+      />
     </div>
   );
 };
