@@ -30,9 +30,9 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((singleUser) => (
+            {users?.map((singleUser, index) => (
               <tr key={singleUser?._id}>
-                <th>1</th>
+                <th>{index + 1}</th>
                 <td>{singleUser?.name}</td>
 
                 <td>{singleUser?.email}</td>

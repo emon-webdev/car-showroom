@@ -16,6 +16,7 @@ import ReportedItems from "../components/ReportedItems";
 import SignIn from "../components/SignUp/SignIn";
 import SignUp from "../components/SignUp/SignUp";
 import DashbordRoot from "./DashbordRoot";
+import PrivateRoute from "./PrivateRoute";
 import Root from "./Root";
 
 const router = createBrowserRouter([
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/myProducts",
-        element: <MyProducts/>,
+        element: <PrivateRoute><MyProducts/></PrivateRoute>,
       },
       {
         path: "/blogs",

@@ -22,7 +22,7 @@ const Advertise = () => {
           <h1 className="text-5xl my-8 font-bold text-center">
             <span className="text-[#e0c83d]">Advertise Items</span>
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {advertises.map((advertise) => (
               <AdvertisedItems key={advertise._id} advertise={advertise} />
             ))}

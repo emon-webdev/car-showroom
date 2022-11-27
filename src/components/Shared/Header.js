@@ -19,7 +19,7 @@ const Header = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/advertise">Advertised Items</Link>
+        <Link to="/dashboard">Add Product</Link>
       </li>
       <li>
         <Link to="/myProducts">My Products</Link>
@@ -37,7 +37,7 @@ const Header = () => {
           </li>
           <li>
             <div className="w-12 rounded-full p-2">
-              <img src={user?.photoURL} alt='' />
+              <img src={user?.photoURL} alt="" />
             </div>
           </li>
         </>
@@ -92,7 +92,7 @@ const Header = () => {
         <label
           htmlFor="dashboard-drawer"
           tabIndex={0}
-          className="btn btn-ghost md:hidden"
+          className="btn btn-ghost lg:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
