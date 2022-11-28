@@ -100,7 +100,11 @@ const CategoryProducts = () => {
         ))}
       </div>
       {/* MOdal content*/}
-      <BookModal user={user} bookingData={bookingData} />
+      <BookModal
+        user={user}
+        setBookingData={setBookingData}
+        bookingData={bookingData}
+      />
     </div>
   );
 };

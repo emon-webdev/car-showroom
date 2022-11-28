@@ -1,14 +1,37 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 
-const BookModal = ({ user, bookingData }) => {
+const BookModal = ({ user, bookingData, setBookingData }) => {
   const handleBook = (event) => {
     event.preventDefault();
-    toast.success("Booking Successfully");
-  };
 
-  const handleBookClick = () => {
-    toast.success("Booking Successfully");
+    const bookingProduct = {
+      productName: bookingData?.title,
+      resalePrice: bookingData?.resalePrice,
+      name: user?.displayName,
+      email: user?.displayName,
+      location: bookingData?.location,
+      number: bookingData?.number,
+    };
+    console.log(bookingProduct);
+
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setBookingData(null);
+          toast.success("Booking Successfully");
+        } else {
+          toast.error(data.message);
+        }
+      });
   };
 
   return (
@@ -93,8 +116,13 @@ const BookModal = ({ user, bookingData }) => {
               placeholder="Phone Number"
               className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
             />
+            {/* <input
+              type="submit"
+              htmlFor="my-modal"
+              value="SUBMIT"
+              className="btn btn-accent w-full text-white max-w-[475px] h-[48px]"
+            /> */}
             <label
-              onClick={handleBookClick}
               htmlFor="my-modal"
               className="btn btn-accent w-full text-white max-w-[475px] h-[48px]"
             >
