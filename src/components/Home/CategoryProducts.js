@@ -99,7 +99,7 @@ const CategoryProducts = () => {
           </div>
         ))}
       </div>
-      {/* MOdal */}
+      {/* MOdal content*/}
       <BookModal user={user} bookingData={bookingData} />
     </div>
   );
