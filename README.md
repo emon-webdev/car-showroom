@@ -4,6 +4,24 @@
 
 Live Website[https://pro-learner-auth.web.app/](https://pro-learner-auth.web.app/)
 
+### Assingment Task
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+- 1 task: Done
+
+
 # What is works in this project
 
 - React
