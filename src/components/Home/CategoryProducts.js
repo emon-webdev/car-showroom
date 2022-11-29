@@ -19,7 +19,7 @@ const CategoryProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products/${category.category}`
+        `https://car-showroom-server.vercel.app/products/${category.category}`
       );
       const data = res.json();
       return data;
@@ -59,7 +59,7 @@ const CategoryProducts = () => {
     };
     console.log(bookingProduct);
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://car-showroom-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,7 +77,7 @@ const CategoryProducts = () => {
       });
 
     //save product to the database for
-    fetch(`http://localhost:5000/products/${productId}`, {
+    fetch(`https://car-showroom-server.vercel.app/products/${productId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -92,7 +92,7 @@ const CategoryProducts = () => {
 
   const handleReport = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://car-showroom-server.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

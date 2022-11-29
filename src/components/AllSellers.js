@@ -10,7 +10,7 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["allSeller"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/allSeller`);
+      const res = await fetch(`https://car-showroom-server.vercel.app/allSeller`);
       const data = await res.json();
       return data;
     },
@@ -26,7 +26,7 @@ const AllSellers = () => {
 
   const handleVerify = (id, email) => {
     console.log(id);
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://car-showroom-server.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -40,7 +40,7 @@ const AllSellers = () => {
         }
       });
 
-    fetch(`http://localhost:5000/products?email=${email}`, {
+    fetch(`https://car-showroom-server.vercel.app/products?email=${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -56,7 +56,7 @@ const AllSellers = () => {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://car-showroom-server.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

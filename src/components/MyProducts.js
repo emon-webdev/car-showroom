@@ -16,7 +16,7 @@ const MyProducts = () => {
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?email=${user?.email}`
+        `https://car-showroom-server.vercel.app/products?email=${user?.email}`
       );
       const data = res.json();
       return data;
@@ -29,7 +29,7 @@ const MyProducts = () => {
 
   //delete product
   const handleDelete = (product) => {
-    fetch(`http://localhost:5000/products/${product._id}`, {
+    fetch(`https://car-showroom-server.vercel.app/products/${product._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -43,7 +43,7 @@ const MyProducts = () => {
 
   const addAdvertise = (product) => {
     //save product to the database for advertises
-    fetch(`http://localhost:5000/products/${product._id}`, {
+    fetch(`https://car-showroom-server.vercel.app/products/${product._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

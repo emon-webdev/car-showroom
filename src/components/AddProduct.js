@@ -59,7 +59,7 @@ const navigate = useNavigate();
           };
           console.log(products);
           //save information to the database
-          fetch("http://localhost:5000/products", {
+          fetch("https://car-showroom-server.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

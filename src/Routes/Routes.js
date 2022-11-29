@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/category/:id",
         element: <CategoryProducts />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+          fetch(`https://car-showroom-server.vercel.app/category/${params.id}`),
       },
 
       {
@@ -157,7 +157,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://car-showroom-server.vercel.app/bookings/${params.id}`),
         element: (
           <PrivateRoute>
             <Payment />

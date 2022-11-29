@@ -9,7 +9,7 @@ const MyBuyers = () => {
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/bookingsSeller/${user?.email}`
+        `https://car-showroom-server.vercel.app/bookingsSeller/${user?.email}`
       );
       const data = res.json();
       return data;
