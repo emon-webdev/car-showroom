@@ -6,20 +6,20 @@ Live Website[https://pro-learner-auth.web.app/](https://pro-learner-auth.web.app
 
 ### Assingment Task
 - 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
-- 1 task: Done
+- 2 task: Done
+- 3 task: Done
+- 4 task: Done
+- 5 task: Done
+- 6 task: Done
+- 7 task: Done
+- 8 task: Done
+- 9 task: Done
+- 10 task: Done
+- 11 task: Done
+- 12 task: Done
+- 13 task: Done
+- 14 task: Done
+- 15 task: Done
 
 
 # What is works in this project
