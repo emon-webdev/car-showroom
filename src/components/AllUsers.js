@@ -55,8 +55,13 @@ const AllUsers = () => {
 
   return (
     <div>
-      <h1 class="text-5xl my-8 font-bold text-center">
-        <span class="text-[#e0c83d]">All Users</span>
+      <h1 className="text-5xl my-8 font-bold text-center">
+        <span className="text-[#e0c83d]">All Users</span>
+      </h1>
+      <h1 className="text-xl my-8 font-bold text-center">
+        <span>
+          If you click (make admin) then show other route
+        </span>
       </h1>
       <div className="overflow-x-auto">
         <table className="table w-full">

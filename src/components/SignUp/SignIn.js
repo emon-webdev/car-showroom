@@ -12,29 +12,28 @@ const SignIn = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserDetails, setLoginUserDetails] = useState("");
-  console.log(loginUserDetails)
+  console.log(loginUserDetails);
   // call location
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
- //handle google sign in
- const handleGoogleSignIn = () => {
-  console.log("google sign in");
-  googleLogin()
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      navigate(from, { replace: true });
-      toast.success("Sign In Successfully");
-    })
-    .catch((err) => {
-      const errorMessage = err.message;
-      setLoginError(errorMessage);
-      console.log(err);
-    });
-};
-
+  //handle google sign in
+  const handleGoogleSignIn = () => {
+    console.log("google sign in");
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        saveUser(user?.displayName, user?.email, "Seller");
+        toast.success("Sign In Successfully");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        const errorMessage = err.message;
+        setLoginError(errorMessage);
+        console.log(err);
+      });
+  };
 
   const handleLogin = (data) => {
     console.log(data);
@@ -49,6 +48,21 @@ const SignIn = () => {
       .then((error) => {
         console.log(error.message);
         setLoginError(error.message);
+      });
+  };
+
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
       });
   };
 
@@ -125,7 +139,10 @@ const SignIn = () => {
           <div className="divider">OR</div>
 
           <div>
-            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-outline w-full"
+            >
               CONTINUE WITH GOOGLE
             </button>
           </div>

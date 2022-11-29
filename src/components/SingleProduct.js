@@ -3,7 +3,7 @@ import React from "react";
 const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
   const {img, description, price,title , status} = product;
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl">
       <figure>
         <img src={img} alt="img" />
       </figure>
@@ -15,7 +15,7 @@ const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
         <h2 className="card-title">
           Price: ${price}
         </h2>
-        <p>{description}</p>
+        <p>{description}</p> 
         <div className="card-actions">
           <button  onClick={() => addAdvertise(product)} className="badge badge-outline">Advertise</button>
           <button onClick={() => handleDelete(product)} className="badge badge-outline">Delete</button>

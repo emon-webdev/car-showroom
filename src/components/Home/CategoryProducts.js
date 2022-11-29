@@ -11,7 +11,6 @@ const CategoryProducts = () => {
   const categoryProducts = useLoaderData();
   const [bookingData, setBookingData] = useState(null);
   const navigation = useNavigation();
-  console.log(bookingData);
 
   if (navigation.state === "loading") {
     return <Loading></Loading>;

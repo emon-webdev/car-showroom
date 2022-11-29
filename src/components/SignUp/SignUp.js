@@ -10,7 +10,6 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const { createUser, updateUserProfile, googleLogin } =
     useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
@@ -51,7 +50,7 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         navigate("/");
-        saveUser(user?.displayName, user?.email, 'seller');
+        saveUser(user?.displayName, user?.email, "Seller");
         toast.success("Sign In Successfully");
       })
       .catch((err) => {
@@ -60,11 +59,11 @@ const SignUp = () => {
         console.log(err);
       });
   };
-  
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch('http://localhost:5000/users', {
+
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -76,7 +75,6 @@ const SignUp = () => {
         console.log(data);
       });
   };
-
 
   return (
     <div className="h-[800px] flex justify-center items-center">

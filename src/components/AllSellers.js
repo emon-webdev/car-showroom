@@ -55,10 +55,23 @@ const AllSellers = () => {
       });
   };
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success("Delete User");
+        }
+      });
+  };
+
   return (
     <div>
-      <h1 class="text-5xl my-8 font-bold text-center">
-        <span class="text-[#e0c83d]">All Sellers</span>
+      <h1 className="text-5xl my-8 font-bold text-center">
+        <span className="text-[#e0c83d]">All Sellers</span>
       </h1>
 
       <div>
@@ -71,6 +84,7 @@ const AllSellers = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Verify</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -84,12 +98,7 @@ const AllSellers = () => {
                   <td>{singleUser?.role}</td>
                   <td>
                     {singleUser?.verify ? (
-                      <button
-                        onClick={() =>
-                          handleVerify(singleUser._id, singleUser?.email)
-                        }
-                        className="btn btn-success btn-xs"
-                      >
+                      <button className="btn btn-success btn-xs">
                         Verified
                       </button>
                     ) : (
@@ -102,6 +111,14 @@ const AllSellers = () => {
                         Verify
                       </button>
                     )}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(singleUser._id)}
+                      className="btn btn-error btn-xs"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

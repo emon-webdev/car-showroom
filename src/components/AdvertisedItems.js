@@ -1,8 +1,22 @@
 import React from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 
-const AdvertisedItems = ({ advertise }) => {
-  console.log(advertise);
+const AdvertisedItems = ({ advertise, handleBook }) => {
+  // const handleBook = (id) => {
+  //   fetch(`http://localhost:5000/bookings/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ role: "admin" }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       toast.success("Added Admin");
+  //     });
+  // };
+
   return (
     <div>
       <div
@@ -41,8 +55,12 @@ const AdvertisedItems = ({ advertise }) => {
           <p>Relevant Info: {advertise.relevantInfo}</p>
           <p>{advertise.description}</p>
           <div className="card-actions">
-            <button className="btn btn-primary btn-sm">Ads</button>
-            <button className="btn btn-primary btn-sm">Book Now</button>
+            <button
+              onClick={() => handleBook(advertise)}
+              className="btn btn-primary btn-sm"
+            >
+              Book Now
+            </button>
           </div>
         </div>
       </div>

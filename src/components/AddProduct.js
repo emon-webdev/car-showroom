@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const AddProduct = () => {
@@ -13,7 +14,7 @@ const AddProduct = () => {
   } = useForm();
 
   const { user } = useContext(AuthContext);
-
+const navigate = useNavigate();
   const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
 
   const currentDate = new Date();
@@ -23,7 +24,6 @@ const AddProduct = () => {
   const categories = ["toyota", "lexus", "bmw"];
 
   const handleAddProduct = (data) => {
-    console.log(data);
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -34,7 +34,6 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        console.log(imgData);
         if (imgData.success) {
           console.log(imgData.data.url);
           const products = {
@@ -42,8 +41,7 @@ const AddProduct = () => {
             time,
             sellerName: user?.displayName,
             email: user?.email,
-            sellerImg:user?.photoURL,
-
+            sellerImg: user?.photoURL,
 
             title: data.title,
             number: data.number,
@@ -72,6 +70,7 @@ const AddProduct = () => {
             .then((result) => {
               console.log(result);
               toast.success(`Product added successfully`);
+              navigate('/dashboard/myProducts')
             });
         }
       });
@@ -80,9 +79,10 @@ const AddProduct = () => {
   return (
     <div>
       <div>
-        <h2 className="text-2xl mb-6 text-[#000000]  font-medium">
+        <h2 className="text-center text-[#e0c83d] my-8 text-4xl font-bold">
           Add a New Product
         </h2>
+
         <div className="">
           <form onSubmit={handleSubmit(handleAddProduct)}>
             <div className="md:flex items-start justify-between">

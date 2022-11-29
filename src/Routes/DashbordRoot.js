@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Header from "../components/Shared/Header";
+import { AuthContext } from "../contexts/AuthProvider";
+import useAdmin from "../hooks/useAdmin";
+import useBuyer from "../hooks/useBuyer";
+import useSeller from "../hooks/useSeller";
 
 const DashbordRoot = () => {
-  
+  const { user } = useContext(AuthContext);
+
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
+  const [isBuyer] = useBuyer(user?.email);
+
   return (
     <div>
       <Header />
@@ -22,24 +31,45 @@ const DashbordRoot = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <Link to="/dashboard">Add Product</Link>
+              <Link to="/dashboard">My WishList</Link>
             </li>
-            <li>
-              <Link to="/dashboard/allUsers">All Users</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/allBuyer">All Buyers</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/allSeller">All Sellers</Link>
-            </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to="/dashboard/allBuyer">All Buyers</Link>
+                </li>
+
+                <li>
+                  <Link to="/dashboard/allSeller">All Sellers</Link>
+                </li>
+
+                <li>
+                  <Link to="/dashboard/reportedItem">Reported Items</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/allUsers">All Users</Link>
+                </li>
+              </>
+            )}
+            {isSeller && (
+              <>
+                <li>
+                  <Link to="/dashboard/addProduct">Add Product</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myProducts">My Products</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myBuyers">My buyers</Link>
+                </li>
+              </>
+            )}
+            {isBuyer && (
+              <li>
+                <Link to="/dashboard/myOrders">My Orders</Link>
+              </li>
+            )}
             
-            <li>
-              <Link to="/dashboard/myOrders">My Orders</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/reportedItem">Reported Items</Link>
-            </li>
           </ul>
         </div>
       </div>

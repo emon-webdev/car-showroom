@@ -64,7 +64,7 @@ const MyProducts = () => {
         If you are showing product then you must be added product{" "}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {products.map((product) => (
           <SingleProduct
             key={product._id}

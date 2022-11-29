@@ -39,8 +39,8 @@ const ReportedItems = () => {
 
   return (
     <div>
-      <h1 class="text-5xl my-8 font-bold text-center">
-        <span class="text-[#e0c83d]">Reported Items</span>
+      <h1 className="text-5xl my-8 font-bold text-center">
+        <span className="text-[#e0c83d]">Reported Items</span>
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {reportItems?.map((reportItem) => (
