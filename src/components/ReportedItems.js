@@ -3,6 +3,7 @@ import React from "react";
 import { toast } from "react-hot-toast";
 
 const ReportedItems = () => {
+
   const {
     data: reportItems = [],
     refetch,
@@ -65,7 +66,7 @@ const ReportedItems = () => {
               <p>Use: {reportItem.uses} year/month</p>
               <p>status: {reportItem.status}</p>
               <p>Relevant Info: {reportItem.relevantInfo}</p>
-              <p>{reportItem.description}</p>
+              <p>{reportItem.description.slice(0, 20) + "..."}</p>
               <div className="card-actions justify-between">
                 <button
                   onClick={() => handleDelete(reportItem._id)}

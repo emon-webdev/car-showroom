@@ -12,7 +12,7 @@ const SignIn = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserDetails, setLoginUserDetails] = useState("");
-  console.log(loginUserDetails);
+
   // call location
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,18 +36,25 @@ const SignIn = () => {
   };
 
   const handleLogin = (data) => {
-    console.log(data);
-    signIn(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        setLoginUserDetails(data.email);
-        toast.success("Sign in Successfully");
-        navigate(from, { replace: true });
-      })
-      .then((error) => {
-        console.log(error.message);
-        setLoginError(error.message);
+    setLoginUserDetails("");
+    fetch(`https://car-showroom-server.vercel.app/user/${data.email}`)
+      .then((res) => res.json())
+      .then((usr) => {
+        if (usr.role === data.role) {
+          signIn(data.email, data.password)
+            .then((result) => {
+              const user = result.user;
+              console.log(user);
+
+              toast.success("Sign in Successfully");
+              navigate(from, { replace: true });
+            })
+            .then((error) => {
+              console.log(error.message);
+            });
+        } else {
+          setLoginUserDetails("Please select Right account role");
+        }
       });
   };
 
@@ -77,6 +84,26 @@ const SignIn = () => {
       >
         <h2 className="text-4xl mb-8 font-medium text-center">Sign In</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="form-control w-full mb-2">
+            <label className="label py-1">
+              {" "}
+              <span className="label-text">Your Role</span>
+            </label>
+
+            <select
+              {...register("role")}
+              className="input input-bordered w-full"
+            >
+              <option defaultValue="seller">Seller</option>
+              <option value="buyer">Buyer</option>
+              <option value="admin">Admin</option>
+            </select>
+
+            <small className="text-danger">
+              {errors?.role && errors.role.message}
+            </small>
+            <small className="text-danger">{loginUserDetails}</small>
+          </div>
           <div className="form-control w-full mb-2">
             <label className="label py-1">
               {" "}

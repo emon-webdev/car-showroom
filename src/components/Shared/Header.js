@@ -21,9 +21,11 @@ const Header = () => {
       <li>
         <Link to="/blogs">Blogs</Link>
       </li>
-      <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
       {user ? (
         <>
           <li>

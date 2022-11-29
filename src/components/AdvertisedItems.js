@@ -2,11 +2,6 @@ import React from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 const AdvertisedItems = ({ advertise, setBookingData }) => {
-
-
-
-
-  
   return (
     <div>
       <div
