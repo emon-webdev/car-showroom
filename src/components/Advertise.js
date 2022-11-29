@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { AuthContext } from "../contexts/AuthProvider";
 import AdvertisedItems from "./AdvertisedItems";
+import BookModal from "./Home/BookModal";
 
 const Advertise = () => {
-  const { user } = useContext(AuthContext);
+  const [bookingData, setBookingData] = useState(null);
   const {
     data: advertises = [],
     refetch,
@@ -20,16 +20,40 @@ const Advertise = () => {
     },
   });
 
-  const handleBook = (advertiseBook) => {
+
+  const closeModal = () => {
+    setBookingData(null);
+  };
+  const booking = (event) => {
+    event.preventDefault();
+    setBookingData(null);
+
+    const form = event.target;
+    const productName = form.title.value;
+    const resalePrice = form.resalePrice.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
+    const buyerName = form.buyerName.value;
+    const buyerEmail = form.buyerEmail.value;
+    const meetingLocation = form.meetingLocation.value;
+    const buyerMobile = form.buyerMobile.value;
+    const sellerNumber = form.sellerNumber.value;
+    const productId = form.productId.value;
+
     const bookingProduct = {
-      productName: advertiseBook.title,
-      resalePrice: advertiseBook.resalePrice,
-      name: user?.displayName,
-      email: user?.email,
-      phone: advertiseBook?.user,
-      location: advertiseBook?.location,
-      img: advertiseBook?.img,
+      productName,
+      resalePrice,
+      sellerName,
+      sellerEmail,
+      buyerName,
+      buyerEmail,
+      meetingLocation,
+      sellerNumber,
+      buyerMobile,
+      productId,
     };
+    console.log(bookingProduct);
+
     fetch("http://localhost:5000/bookings", {
       method: "POST",
       headers: {
@@ -42,10 +66,22 @@ const Advertise = () => {
         console.log(data);
         if (data.acknowledged) {
           toast.success("Booking Successfully");
-          refetch();
         } else {
           toast.error(data.message);
         }
+      });
+
+    //save product to the database for
+    fetch(`http://localhost:5000/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ booked: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        refetch();
       });
   };
 
@@ -69,7 +105,7 @@ const Advertise = () => {
               <AdvertisedItems
                 key={advertise._id}
                 advertise={advertise}
-                handleBook={handleBook}
+                setBookingData={setBookingData}
               />
             ))}
           </div>
@@ -77,6 +113,17 @@ const Advertise = () => {
       ) : (
         " "
       )}
+
+      <div>
+        {/* MOdal content*/}
+      {bookingData && (
+        <BookModal
+          bookingData={bookingData}
+          closeModal={closeModal}
+          booking={booking}
+        />
+      )}
+      </div>
     </div>
   );
 };

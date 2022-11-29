@@ -1,169 +1,137 @@
-import React from "react";
-import { toast } from "react-hot-toast";
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 
-const BookModal = ({ user, bookingData, setBookingData }) => {
-  // console.log(bookingData);
-
-  const handleBook = (event) => {
-    event.preventDefault();
-
-    const form = event.target;
-    const productName = form.title.value;
-    const resalePrice = form.resalePrice.value;
-    const name = form.name.value;
-    const email = form.email.value;
-    const location = form.location.value;
-    const phone = form.phone.value;
-
-    console.log(productName, resalePrice, name, email, location, phone);
-    const img = bookingData.img;
-    const bookingProduct = {
-      productName,
-      resalePrice,
-      name,
-      email,
-      phone,
-      location,
-      img,
-    };
-    console.log(bookingProduct);
-
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast.success("Booking Successfully");
-          setBookingData(null);
-        } else {
-          toast.error(data.message);
-        }
-      });
-  };
-
+const BookModal = ({ booking, bookingData, closeModal }) => {
+  const { user } = useContext(AuthContext);
+  const { _id, email, number, title, resalePrice, sellerName } = bookingData;
   return (
     <div>
-      <input type="checkbox" id="my-modal" className="modal-toggle" />
-
+      <input type="checkbox" id="book-now" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box relative">
-          <label
-            htmlFor="my-modal"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <form onSubmit={handleBook} className="text-center">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Product Name</span>
-            </label>
-            <input
-              type="text"
-              disabled
-              name="title"
-              value={bookingData?.title}
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Resale Price</span>
-            </label>
-            <input
-              type="text"
-              disabled
-              name="resalePrice"
-              value={bookingData?.resalePrice}
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Name</span>
-            </label>
-            <input
-              type="text"
-              defaultValue={user?.displayName}
-              name="name"
-              readOnly
-              placeholder="Full Name"
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              defaultValue={user?.email}
-              name="email"
-              required
-              readOnly
-              placeholder="Email"
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Location</span>
-            </label>
-            <input
-              type="text"
-              defaultValue={bookingData?.location}
-              name="location"
-              required
-              placeholder="Email"
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Phone Number</span>
-            </label>
-            <input
-              type="text"
-              name="phone"
-              defaultValue={bookingData?.number}
-              required
-              placeholder="Phone Number"
-              className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
-            />
-
-            <div className="hidden">
-              <label className="label py-1">
-                {" "}
-                <span className="label-text font-semibold text-[#383838] mb-[10px] text-[14px]">
-                  Photo
-                </span>
+        <div className="modal-box">
+          <form onSubmit={booking}>
+            {/* {/ name field  /} */}
+            <div className=" flex  font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Product ID: </span>
+              </label>
+              <input disabled name="productId" defaultValue={_id} type="text" />
+            </div>
+            {/* {/ seller name  /} */}
+            <div className=" flex  font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Seller Name: </span>
               </label>
               <input
-                type="file"
-                name="img"
-                defaultValue={bookingData?.img}
-                required
                 disabled
-                placeholder="Image"
-                className="input input-bordered input-info w-full max-w-[475px] h-[48px] mb-5"
+                name="sellerName"
+                defaultValue={sellerName}
+                type="text"
               />
             </div>
-
-            <input
-              type="submit"
-              value="SUBMIT"
-              className="btn btn-accent w-full text-white max-w-[475px] h-[48px]"
-            />
-
-            {/* <label
-              type="submit"
-              htmlFor="my-modal"
-              value="SUBMIT"
-              className="btn btn-accent w-full text-white max-w-[475px] h-[48px]"
-            >
-              Submit
-            </label> */}
+            {/* {/ seller email  /} */}
+            <div className=" flex  font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Seller Email: </span>
+              </label>
+              <input
+                disabled
+                name="sellerEmail"
+                defaultValue={email}
+                type="text"
+              />
+            </div>
+            {/* {/ seller phone number  /} */}
+            <div className=" flex  font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Seller phone number: </span>
+              </label>
+              <input
+                disabled
+                name="sellerNumber"
+                defaultValue={number}
+                type="text"
+              />
+            </div>
+            {/*buyer name name field  */}
+            <div className=" flex  font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Your Name: </span>
+              </label>
+              <input
+                disabled
+                name="buyerName"
+                defaultValue={user.displayName}
+                type="text"
+              />
+            </div>
+            {/* {/ email field  /} */}
+            <div className=" flex  mt-4 font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Your Email: </span>
+              </label>
+              <input
+                disabled
+                name="buyerEmail"
+                defaultValue={user.email}
+                type="text"
+              />
+            </div>
+            <div className=" flex  mt-4 font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Product Name: </span>
+              </label>
+              <input
+                disabled
+                name="title"
+                defaultValue={title}
+                type="text"
+              />
+            </div>
+            <div className=" flex  mt-4 font-bold text-lg">
+              <label className="label">
+                <span className="label-text">price: </span>
+              </label>
+              <input
+                disabled
+                name="resalePrice"
+                defaultValue={resalePrice}
+                type="text"
+              />
+            </div>
+            <div className=" flex  mt-4 font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Your Phone Number: </span>
+              </label>
+              <input
+                required
+                name="buyerMobile"
+                className="input input-bordered"
+                type="phone"
+              />
+            </div>
+            <div className=" flex  mt-4 font-bold text-lg">
+              <label className="label">
+                <span className="label-text">Meeting Location: </span>
+              </label>
+              <input
+                required
+                name="meetingLocation"
+                className="input input-bordered"
+                type="text"
+              />
+            </div>
+            <div className="modal-action">
+              <button
+                type="submit"
+                className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white "
+              >
+                Submit
+              </button>
+              <label onClick={closeModal} className="btn">
+                Cancel
+              </label>
+            </div>
           </form>
         </div>
       </div>

@@ -1,20 +1,94 @@
-import React, { useContext, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useLoaderData, useNavigation } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthProvider";
 import Loading from "../Loading";
 import BookModal from "./BookModal";
 
 const CategoryProducts = () => {
-  const { user } = useContext(AuthContext);
-  const categoryProducts = useLoaderData();
+  const category = useLoaderData();
   const [bookingData, setBookingData] = useState(null);
   const navigation = useNavigation();
 
-  if (navigation.state === "loading") {
-    return <Loading></Loading>;
-  }
+  const {
+    data: products = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/products/${category.category}`
+      );
+      const data = res.json();
+      return data;
+    },
+  });
+
+  const closeModal = () => {
+    setBookingData(null);
+  };
+  const booking = (event) => {
+    event.preventDefault();
+    setBookingData(null);
+
+    const form = event.target;
+    const productName = form.title.value;
+    const resalePrice = form.resalePrice.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
+    const buyerName = form.buyerName.value;
+    const buyerEmail = form.buyerEmail.value;
+    const meetingLocation = form.meetingLocation.value;
+    const buyerMobile = form.buyerMobile.value;
+    const sellerNumber = form.sellerNumber.value;
+    const productId = form.productId.value;
+
+    const bookingProduct = {
+      productName,
+      resalePrice,
+      sellerName,
+      sellerEmail,
+      buyerName,
+      buyerEmail,
+      meetingLocation,
+      sellerNumber,
+      buyerMobile,
+      productId,
+    };
+    console.log(bookingProduct);
+
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Booking Successfully");
+        } else {
+          toast.error(data.message);
+        }
+      });
+
+    //save product to the database for
+    fetch(`http://localhost:5000/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ booked: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        refetch();
+      });
+  };
 
   const handleReport = (id) => {
     console.log(id);
@@ -32,13 +106,17 @@ const CategoryProducts = () => {
       });
   };
 
+  if (navigation.state === "loading" || isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="mb-12">
       <h1 className="text-5xl my-8 font-bold text-center">
         <span className="text-[#e0c83d]">Item Wise Same Category Products</span>
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {categoryProducts.map((categoryProduct) => (
+        {products.map((categoryProduct) => (
           <div
             key={categoryProduct._id}
             className="card card-compact w-96 bg-base-100 shadow-xl"
@@ -87,7 +165,7 @@ const CategoryProducts = () => {
                   Report
                 </button>
                 <label
-                  htmlFor="my-modal"
+                  htmlFor="book-now"
                   onClick={() => setBookingData(categoryProduct)}
                   className="btn btn-primary"
                 >
@@ -99,11 +177,13 @@ const CategoryProducts = () => {
         ))}
       </div>
       {/* MOdal content*/}
-      <BookModal
-        user={user}
-        setBookingData={setBookingData}
-        bookingData={bookingData}
-      />
+      {bookingData && (
+        <BookModal
+          bookingData={bookingData}
+          closeModal={closeModal}
+          booking={booking}
+        />
+      )}
     </div>
   );
 };

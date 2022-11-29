@@ -9,13 +9,13 @@ const MyOrders = () => {
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:5000/bookings?email=${user?.email}`
-      );
+      const res = await fetch(`http://localhost:5000/bookings/${user?.email}`);
       const data = res.json();
       return data;
     },
   });
+
+  console.log(bookings);
 
   if (isLoading) {
     return <Loading />;
