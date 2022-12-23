@@ -3,7 +3,6 @@ import React from "react";
 const Products = () => {
 
 
-  // const categories = [{ category: 'iphone' }, { category: 'xiaomi' }, { category: 'oppo' }]
 
   return (
     <div className="my-12">

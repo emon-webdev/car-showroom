@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 const AllBuyer = () => {
   const [buyers, setBuyers] = useState([]);
   useEffect(() => {
-    axios.get("https://car-showroom-server.vercel.app/allBuyer").then((res) => {
+    axios.get("https://car-showroom-server.vercel.app/allBuyer")
+    .then((res) => {
       setBuyers(res.data);
     });
   }, []);
