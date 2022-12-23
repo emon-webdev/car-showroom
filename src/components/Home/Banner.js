@@ -13,7 +13,7 @@ const Banner = () => {
           <p className="mb-5 text-6xl font-bold">
             Car and Bike Resale Here.
           </p>
-          <button className="btn btn-warning">Click Here</button>
+          <button className="primary-btn">Click Here</button>
         </div>
       </div>
     </div>

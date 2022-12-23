@@ -52,6 +52,21 @@ const Header = () => {
 
   return (
     <div className="">
+      <div className="header-top-bar p-2 max-w-[1400px] mx-auto justify-between  bg-base-100">
+        <div className="flex items-center justify-between">
+          <div className="top-left">
+            <p> Call Us: +01 123 456 78 </p>
+            <p> E-mail: info@autoshowroom.com</p>
+          </div>
+          <div className="top-right">
+            <p>
+              Welcome to Auto Showroom.
+              <Link to="/signin">Sign In</Link> or
+              <Link to="/signup">Register</Link>
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="navbar max-w-[1400px] mx-auto justify-between  bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
