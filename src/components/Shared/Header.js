@@ -27,48 +27,27 @@ const Header = () => {
         </li>
       )}
       {user ? (
-        <>
-          <li>
-            <button onClick={handleLogOut}>Sign Out</button>
-          </li>
-          <li>
-            <div className="w-12 rounded-full p-2">
-              <img src={user?.photoURL} alt="" />
-            </div>
-          </li>
-        </>
+        <div className="px-4 rounded-sm text-white bg-[#ff5400] flex items-center justify-between">
+          <div className="w-12 rounded-full p-2">
+            <img src={user?.photoURL} alt="" />
+          </div>
+          <span className="px-2">or</span>
+          <button onClick={handleLogOut}>Sign Out</button>
+        </div>
       ) : (
-        <>
-          <li>
-            <Link to="/signin">Sign In</Link>
-          </li>
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-        </>
+        <div className="px-4 rounded-sm text-white bg-[#ff5400] flex items-center justify-between">
+          <Link to="/signin">Login</Link>
+          <span className="px-2">or</span>
+          <Link to="/signup">Register</Link>
+        </div>
       )}
     </>
   );
 
   return (
-    <div className="">
-      <div className="header-top-bar p-2 max-w-[1400px] mx-auto justify-between  bg-base-100">
-        <div className="flex items-center justify-between">
-          <div className="top-left">
-            <p> Call Us: +01 123 456 78 </p>
-            <p> E-mail: info@autoshowroom.com</p>
-          </div>
-          <div className="top-right">
-            <p>
-              Welcome to Auto Showroom.
-              <Link to="/signin">Sign In</Link> or
-              <Link to="/signup">Register</Link>
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="header-area py-3">
       <div className="navbar max-w-[1400px] mx-auto justify-between  bg-base-100">
-        <div className="navbar-start">
+        <div className="navbar-start max-w-fit">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost md:hidden">
               <svg
@@ -93,11 +72,11 @@ const Header = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-2xl">
-            Car <span className="text-[#e0c83d] ml-2">Showroom</span>
+          <Link to="/" className="font-bold uppercase text-2xl">
+            Car <span className="text-[#ff5400]">Showroom</span>
           </Link>
         </div>
-        <div className="navbar-center hidden md:flex">
+        <div className="navbar-center hidden md:flex items-center justify-between">
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <label

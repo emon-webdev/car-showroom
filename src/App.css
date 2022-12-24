@@ -8,7 +8,13 @@
   height: 52px;
   line-height: 52px;
   background: #df0303;
-  border-radius: 4px;
+  border-radius: 2px;
   color: #ffffff;
   padding: 0 33px;
+  border: none;
+  transition: 0.3s;
+}
+.primary-btn:hover {
+  background: #222;
+  border: none;
 }
