@@ -16,26 +16,49 @@ const Header = () => {
   const menuItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="text-[#010C3A]" to="/">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/blogs">Blogs</Link>
+        <Link className="text-[#010C3A]" to="/shops">
+          Shops
+        </Link>
+      </li>
+      <li>
+        <Link className="text-[#010C3A]" to="/blogs">
+          Blogs
+        </Link>
       </li>
       {user && (
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link className="text-[#010C3A]" to="/dashboard">
+            Dashboard
+          </Link>
         </li>
       )}
       {user ? (
-        <div className="px-4 ml-2 rounded-sm text-white bg-[#df0303] flex items-center justify-between">
-          <button onClick={handleLogOut}>Sign Out</button>
+        <div className="">
+          <button
+            className="hover:bg-[#df0303] px-[1rem] py-[.75rem] hover:text-[#fff] px-4  ml-2 rounded-sm text-white text-[#010C3A] flex items-center justify-between"
+            onClick={handleLogOut}
+          >
+            Sign Out
+          </button>
         </div>
       ) : (
-        <div className="px-4 ml-2 rounded-sm text-white bg-[#df0303] flex items-center justify-between">
-          <Link to="/signin">Login</Link>
-          <span className="px-2">or</span>
-          <Link to="/signup">Register</Link>
-        </div>
+        <>
+          <li>
+            <Link className="text-[#010C3A]" to="/signin">
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link className="text-[#010C3A]" to="/signup">
+              Register
+            </Link>
+          </li>
+        </>
       )}
     </>
   );
@@ -69,12 +92,17 @@ const Header = () => {
                 {menuItems}
               </ul>
             </div>
-            <Link to="/" className="font-bold uppercase text-2xl">
-              Car <span className="text-[#df0303]">RENTAL</span>
+            <Link
+              to="/"
+              className="text-[#010C3A] font-bold uppercase text-2xl"
+            >
+              Car <span className="text-[#df0303]">RESELL</span>
             </Link>
           </div>
           <div className="navbar-center hidden md:flex items-center justify-between">
-            <ul className="menu menu-horizontal p-0">{menuItems}</ul>
+            <ul className="menu menu-horizontal items-center p-0">
+              {menuItems}
+            </ul>
           </div>
           <label
             htmlFor="dashboard-drawer"

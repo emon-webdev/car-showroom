@@ -105,16 +105,6 @@ const Advertise = () => {
               </span>
             </h2>
 
-            {/* <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {advertises.map((advertise) => (
-                <AdvertisedItems
-                  key={advertise._id}
-                  advertise={advertise}
-                  setBookingData={setBookingData}
-                />
-              ))}
-            </div> */}
-
             <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
               {advertises.map((advertise) => (
                 <AdvertisedItems
@@ -128,7 +118,6 @@ const Advertise = () => {
         ) : (
           " "
         )}
-
         <div>
           {/* MOdal content*/}
           {bookingData && (

@@ -30,7 +30,7 @@ const Category = () => {
             Category
           </span>
         </h2>
-        <div className="grid gap-6 md:grid-cols-4 grid-cols-2 mt-12">
+        <div className="grid gap-2 md:grid-cols-4 grid-cols-2 mt-12">
           {categories?.map((category, i) => (
             <Link
               to={`/category/${category?.name}`}
@@ -38,7 +38,7 @@ const Category = () => {
               className="category"
             >
               <div className="text-center">
-                <h4 className="text-[#010c3a] capitalize text-xl font-semibold mb-3 ">
+                <h4 className="text-[#010c3a] uppercase text-xl font-semibold mb-3 ">
                   {category?.name}
                 </h4>
                 <div className="icon m-auto">

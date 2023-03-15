@@ -9,6 +9,7 @@ import Blogs from "../components/Blogs";
 import ErrorPage from "../components/ErrorPage";
 import CategoryProducts from "../components/Home/CategoryProducts";
 import Home from "../components/Home/Home";
+import ProductDetails from "../components/Home/ProductDetails";
 import MyBuyers from "../components/MyBuyers";
 import MyOrders from "../components/MyOrders";
 import MyProducts from "../components/MyProducts";
@@ -17,6 +18,7 @@ import Payment from "../components/Payment";
 import ReportedItems from "../components/ReportedItems";
 import SignIn from "../components/SignUp/SignIn";
 import SignUp from "../components/SignUp/SignUp";
+import Shops from "../pages/Shops";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
 import DashbordRoot from "./DashbordRoot";
@@ -35,10 +37,21 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "/shops",
+        element: <Shops />,
+        loader:({})=> fetch(`http://localhost:5000/products`)
+      },
+      {
         path: "/category/:name",
         element: <CategoryProducts />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/${params.name}`),
+      },
+      {
+        path: "/product-details/:id",
+        element: <ProductDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/product-details/${params.id}`),
       },
       {
         path: "/advertise",

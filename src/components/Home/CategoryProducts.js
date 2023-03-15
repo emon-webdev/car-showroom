@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import Loading from "../Loading";
+import DynamicBanner from "../Shared/DynamicBanner";
 import BookModal from "./BookModal";
 
 const CategoryProducts = () => {
@@ -109,80 +110,104 @@ const CategoryProducts = () => {
   }
 
   return (
-    <div className="mb-12">
-      <h1 className="text-5xl my-8 font-bold text-center">
-        <span className="text-[#df0303]">Item Wise Same Category Products</span>
-      </h1>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {products.map((categoryProduct) => (
-          <div
-            key={categoryProduct._id}
-            className="card card-compact rounded-sm w-96 bg-base-100 shadow-xl"
-          >
-            <figure>
-              <img src={categoryProduct.img} alt="Shoes" />
-            </figure>
-            <div className="card-body">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="avatar">
-                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img src={categoryProduct?.sellerImg} alt="img" />
+    <>
+      <DynamicBanner title="Category Products" />
+      <div className="container mb-12">
+        <h1 className="text-5xl my-8 font-bold text-center">
+          <span className="text-[#df0303]">
+            Item Wise Same Category Products
+          </span>
+        </h1>
+        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
+          {products.map((categoryProduct) => (
+            <>
+              <div
+                key={categoryProduct._id}
+                className="card card-compact rounded bg-base-100 shadow-xl"
+              >
+                <figure>
+                  <img
+                    className="max-h-[200px] w-full h-[200px]"
+                    src={categoryProduct.img}
+                    alt={categoryProduct.title}
+                  />
+                </figure>
+                <div className="card-body justify-between">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="avatar">
+                        <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <img src={categoryProduct?.sellerImg} alt="img" />
+                        </div>
+                        {categoryProduct.verifyUser && (
+                          <BsCheckCircleFill className="text-green-500 text-xl " />
+                        )}
+                      </div>
                     </div>
-                    {categoryProduct.verifyUser && (
-                      <BsCheckCircleFill className="text-green-500 text-xl " />
-                    )}
+                    <div>
+                      <p>Seller Name: {categoryProduct.sellerName} </p>
+                      <p>Email: {categoryProduct.email} </p>
+                    </div>
+                  </div>
+
+                  <h2 className="card-title">Name: {categoryProduct.title}</h2>
+                  <h2 className="card-title">
+                    Category: {categoryProduct.category}
+                  </h2>
+                  <p>
+                    Date: {categoryProduct.date} Time: {categoryProduct.time}
+                  </p>
+                  <p>Date: {categoryProduct.location}</p>
+
+                  <p>Original Price: {categoryProduct.originalPrice}</p>
+                  <p>Resale Price: {categoryProduct.resalePrice}</p>
+                  <p>Use: {categoryProduct.uses} year/month</p>
+                  <p>status: {categoryProduct.status}</p>
+                  <p>Relevant Info: {categoryProduct.relevantInfo}</p>
+                  <p>{categoryProduct.description}</p>
+
+                  <div
+                    className="card-actions "
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, 1fr)",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleReport(categoryProduct._id)}
+                      className="btn btn-outline btn-primary w-full rounded"
+                    >
+                      Report
+                    </button>
+                    <label
+                      htmlFor="book-now"
+                      onClick={() => setBookingData(categoryProduct)}
+                      className="btn btn-outline btn-primary w-full rounded"
+                    >
+                      Book Now
+                    </label>
+                    <Link
+                      to={`/product-details/${categoryProduct._id}`}
+                      className="btn btn-outline btn-primary w-full rounded"
+                    >
+                      See More!
+                    </Link>
                   </div>
                 </div>
-                <div>
-                  <p>Seller Name: {categoryProduct.sellerName} </p>
-                  <p>Email: {categoryProduct.email} </p>
-                </div>
               </div>
-
-              <h2 className="card-title">Name: {categoryProduct.title}</h2>
-              <h2 className="card-title">
-                Category: {categoryProduct.category}
-              </h2>
-              <p>
-                Date: {categoryProduct.date} Time: {categoryProduct.time}
-              </p>
-              <p>Date: {categoryProduct.location}</p>
-
-              <p>Original Price: {categoryProduct.originalPrice}</p>
-              <p>Resale Price: {categoryProduct.resalePrice}</p>
-              <p>Use: {categoryProduct.uses} year/month</p>
-              <p>status: {categoryProduct.status}</p>
-              <p>Relevant Info: {categoryProduct.relevantInfo}</p>
-              <p>{categoryProduct.description}</p>
-              <div className="card-actions justify-between">
-                <button
-                  onClick={() => handleReport(categoryProduct._id)}
-                  className="primary-btn"
-                >
-                  Report
-                </button>
-                <label
-                  htmlFor="book-now"
-                  onClick={() => setBookingData(categoryProduct)}
-                  className="primary-btn"
-                >
-                  Book Now
-                </label>
-              </div>
-            </div>
-          </div>
-        ))}
+            </>
+          ))}
+        </div>
+        {/* MOdal content*/}
+        {bookingData && (
+          <BookModal
+            bookingData={bookingData}
+            closeModal={closeModal}
+            booking={booking}
+          />
+        )}
       </div>
-      {/* MOdal content*/}
-      {bookingData && (
-        <BookModal
-          bookingData={bookingData}
-          closeModal={closeModal}
-          booking={booking}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

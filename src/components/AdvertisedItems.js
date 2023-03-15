@@ -2,8 +2,10 @@ import React from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { BsSpeedometer2 } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
+import { Link } from "react-router-dom";
 const AdvertisedItems = ({ advertise, setBookingData }) => {
   const {
+    _id,
     location,
     date,
     category,
@@ -17,7 +19,11 @@ const AdvertisedItems = ({ advertise, setBookingData }) => {
     <>
       <div className="card card-compact rounded bg-base-100 shadow-xl">
         <figure className="max-h-[200px] w-full">
-          <img className="max-h-[200px] h-[200px]" src={img} alt="car!" />
+          <img
+            className="max-h-[200px] w-full h-[200px]"
+            src={img}
+            alt="car!"
+          />
           {/* <img src="https://placeimg.com/400/225/arch" alt="car!" /> */}
         </figure>
         <div className="card-body justify-between">
@@ -51,9 +57,12 @@ const AdvertisedItems = ({ advertise, setBookingData }) => {
             </div>
           </div>
           <div className="card-actions mt-3">
-            <button className="btn btn-outline btn-primary w-full rounded">
+            <Link
+              to={`/product-details/${_id}`}
+              className="btn btn-outline btn-primary w-full rounded"
+            >
               See More!
-            </button>
+            </Link>
           </div>
         </div>
       </div>

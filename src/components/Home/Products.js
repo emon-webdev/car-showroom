@@ -1,9 +1,6 @@
 import React from "react";
 
 const Products = () => {
-
-
-
   return (
     <div className="my-12">
       <h1 className="text-5xl mb-8 font-bold text-center">
