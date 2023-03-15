@@ -19,7 +19,7 @@ const CategoryProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products/${category.name}`
+        `https://car-showroom-server.vercel.app/products/${category.name}`
       );
       const data = res.json();
       return data;

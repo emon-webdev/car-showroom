@@ -39,19 +39,19 @@ const router = createBrowserRouter([
       {
         path: "/shops",
         element: <Shops />,
-        loader:({})=> fetch(`http://localhost:5000/products`)
+        loader:({})=> fetch(`https://car-showroom-server.vercel.app/products`)
       },
       {
         path: "/category/:name",
         element: <CategoryProducts />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.name}`),
+          fetch(`https://car-showroom-server.vercel.app/category/${params.name}`),
       },
       {
         path: "/product-details/:id",
         element: <ProductDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/product-details/${params.id}`),
+          fetch(`https://car-showroom-server.vercel.app/product-details/${params.id}`),
       },
       {
         path: "/advertise",
