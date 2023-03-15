@@ -17,12 +17,10 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
-    console.log(data.role);
     setSignUPError("");
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         toast("User Created Successfully.");
         const userInfo = {
           displayName: data.name,
@@ -31,13 +29,11 @@ const SignUp = () => {
         updateUserProfile(userInfo)
           .then(() => {
             saveUser(data.name, data.email, data.role);
-            console.log(data.name, data.email);
             navigate("/");
           })
           .catch((err) => console.log(err));
       })
       .catch((error) => {
-        console.log(error);
         setSignUPError(error.message);
       });
   };

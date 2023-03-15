@@ -35,20 +35,16 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
           const products = {
             date,
             time,
             sellerName: user?.displayName,
             email: user?.email,
             sellerImg: user?.photoURL,
-
             title: data.title,
             number: data.number,
             relevantInfo: data.relevantInfo,
-
             category: data.category,
-
             resalePrice: data.resalePrice,
             originalPrice: data.price,
             uses: data.uses,
@@ -57,7 +53,6 @@ const AddProduct = () => {
             img: imgData.data.url,
             description: data.description,
           };
-          console.log(products);
           //save information to the database
           fetch("https://car-showroom-server.vercel.app/products", {
             method: "POST",
@@ -68,7 +63,6 @@ const AddProduct = () => {
           })
             .then((res) => res.json())
             .then((result) => {
-              console.log(result);
               toast.success(`Product added successfully`);
               navigate("/dashboard/myProducts");
             });
@@ -131,7 +125,7 @@ const AddProduct = () => {
                   </span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   {...register("resalePrice", {
                     required: "Resale is required",
                   })}

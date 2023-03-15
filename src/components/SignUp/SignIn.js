@@ -22,7 +22,6 @@ const SignIn = () => {
 
   //handle google sign in
   const handleGoogleSignIn = () => {
-    console.log("google sign in");
     googleLogin()
       .then((result) => {
         const user = result.user;
@@ -33,7 +32,6 @@ const SignIn = () => {
       .catch((err) => {
         const errorMessage = err.message;
         setLoginError(errorMessage);
-        console.log(err);
       });
   };
 

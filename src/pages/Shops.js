@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ImBullhorn } from "react-icons/im";
 import SingleShopItems from "../components/Home/SingleShopItems";
@@ -11,16 +11,22 @@ const Shops = () => {
   const [size, setSize] = useState(10);
 
   const pages = Math.ceil(count / size);
-
+  const [search, setSearch] = useState("");
+  const searchRef = useRef();
   useEffect(() => {
-    fetch(`http://localhost:5000/products?page=${page}&size=${size}`)
-      // fetch(`http://localhost:5000/products`)
+    fetch(
+      `http://localhost:5000/products?search=${search}&page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCount(data.count);
         setProducts(data.products);
       });
-  }, [page, size]);
+  }, [page, search, size]);
+
+  const handleSearch = () => {
+    setSearch(searchRef.current.value);
+  };
 
   // const {
   //   data: { products, count } = [],
@@ -41,8 +47,6 @@ const Shops = () => {
   //   </div>;
   // }
 
-  console.log(products, count);
-
   return (
     <div>
       <DynamicBanner title="Shops" />
@@ -54,16 +58,20 @@ const Shops = () => {
               All Products
             </span>
           </h2>
-          <div className="product-filter flex items-center justify-between bg-[#f8f8f8] py-3">
-            <div className="sort-product"></div>
+          <div className="product-filter flex items-center justify-center  py-3">
+            {/* <div className="sort-product"></div> */}
             <div className="product-search flex items-center justify-between">
               <input
+                ref={searchRef}
                 type="text"
-                placeholder="Type here"
-                className="input  input-bordered rounded-[0px] w-full"
+                placeholder="Search Product"
+                className="input text-[#333] input-bordered border-[#ddd] rounded-[0px] w-full"
               />
-              <button className="btn btn-square btn-outline">
-                <AiOutlineSearch />
+              <button
+                onClick={handleSearch}
+                className="btn btn-square rounded-[0px] btn-outline"
+              >
+                <AiOutlineSearch className="text-[22px]" />
               </button>
             </div>
           </div>

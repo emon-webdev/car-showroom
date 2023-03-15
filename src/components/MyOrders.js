@@ -15,7 +15,6 @@ const MyOrders = () => {
     },
   });
 
-  console.log(bookings);
 
   if (isLoading) {
     return <Loading />;

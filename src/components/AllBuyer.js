@@ -10,7 +10,6 @@ const AllBuyer = () => {
     });
   }, []);
 
-  console.log(buyers);
 
   return (
     <div>

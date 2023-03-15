@@ -3,7 +3,7 @@ import { BiTimeFive } from "react-icons/bi";
 import { Link } from "react-router-dom";
 const SingleShopItems = ({ product }) => {
   const { _id, img, resalePrice, sellerImg, sellerName, title, date } = product;
-  console.log(product);
+
   return (
     <Link
       to={`/product-details/${_id}`}

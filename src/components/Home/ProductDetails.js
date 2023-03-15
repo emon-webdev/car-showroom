@@ -13,7 +13,6 @@ import year from "../../assets/year.svg";
 const ProductDetails = () => {
   const singleProduct = useLoaderData();
   const { img, resalePrice } = singleProduct;
-  console.log(singleProduct);
   return (
     <div className="bg-[#f0f3f8] py-16">
       <div className="container mx-auto px-4">

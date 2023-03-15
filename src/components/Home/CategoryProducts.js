@@ -25,7 +25,6 @@ const CategoryProducts = () => {
       return data;
     },
   });
-  console.log(products);
   const closeModal = () => {
     setBookingData(null);
   };
@@ -90,7 +89,6 @@ const CategoryProducts = () => {
   };
 
   const handleReport = (id) => {
-    console.log(id);
     fetch(`https://car-showroom-server.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {

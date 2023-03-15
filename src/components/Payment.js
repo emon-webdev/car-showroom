@@ -3,7 +3,6 @@ import { useLoaderData } from "react-router-dom";
 
 const Payment = () => {
   const booking = useLoaderData();
-  console.log(booking);
   return (
     <div>
       <h2 className=" text-[#df0303] my-8 text-4xl font-bold">

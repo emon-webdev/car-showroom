@@ -8,7 +8,6 @@ const useBuyer = (email) => {
       fetch(`https://car-showroom-server.vercel.app/users/Buyer/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setIsBuyer(data.isBuyer);
           setIsBuyerLoading(false);
         });
