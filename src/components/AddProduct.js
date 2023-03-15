@@ -14,7 +14,7 @@ const AddProduct = () => {
   } = useForm();
 
   const { user } = useContext(AuthContext);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
 
   const currentDate = new Date();
@@ -70,7 +70,7 @@ const navigate = useNavigate();
             .then((result) => {
               console.log(result);
               toast.success(`Product added successfully`);
-              navigate('/dashboard/myProducts')
+              navigate("/dashboard/myProducts");
             });
         }
       });
@@ -79,7 +79,7 @@ const navigate = useNavigate();
   return (
     <div>
       <div>
-        <h2 className="text-center text-[#e0c83d] my-8 text-4xl font-bold">
+        <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
           Add a New Product
         </h2>
 

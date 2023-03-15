@@ -7,7 +7,7 @@ const Products = () => {
   return (
     <div className="my-12">
       <h1 className="text-5xl mb-8 font-bold text-center">
-        MOST POPULAR <span className="text-[#e0c83d]">CAR Resale DEALS</span>
+        MOST POPULAR <span className="text-[#df0303]">CAR Resale DEALS</span>
       </h1>
       <div>
         <div>

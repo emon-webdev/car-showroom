@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { ImBullhorn } from "react-icons/im";
 import AdvertisedItems from "./AdvertisedItems";
 import BookModal from "./Home/BookModal";
-
 const Advertise = () => {
   const [bookingData, setBookingData] = useState(null);
   const {
@@ -13,13 +13,13 @@ const Advertise = () => {
   } = useQuery({
     queryKey: ["addProducts"],
     queryFn: async () => {
-      const res = await fetch(`https://car-showroom-server.vercel.app/advertises`);
+      const res = await fetch(
+        `https://car-showroom-server.vercel.app/advertises`
+      );
       const data = await res.json();
-
       return data;
     },
   });
-
 
   const closeModal = () => {
     setBookingData(null);
@@ -94,35 +94,51 @@ const Advertise = () => {
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto">
-      {advertises?.length > 0 ? (
-        <>
-          <h1 className="text-5xl my-8 font-bold text-center">
-            <span className="text-[#e0c83d]">Advertise Items</span>
-          </h1>
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {advertises.map((advertise) => (
-              <AdvertisedItems
-                key={advertise._id}
-                advertise={advertise}
-                setBookingData={setBookingData}
-              />
-            ))}
-          </div>
-        </>
-      ) : (
-        " "
-      )}
+    <div className="advertisements-area md:py-16 py-12">
+      <div className="container">
+        {advertises?.length > 0 ? (
+          <>
+            <h2 className="text-4xl font-bold mb-7 text-center title__before">
+              <span className="bg-white px-6">
+                <ImBullhorn className="mr-3 inline-block text-primary"></ImBullhorn>
+                Advertisements
+              </span>
+            </h2>
 
-      <div>
-        {/* MOdal content*/}
-      {bookingData && (
-        <BookModal
-          bookingData={bookingData}
-          closeModal={closeModal}
-          booking={booking}
-        />
-      )}
+            {/* <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {advertises.map((advertise) => (
+                <AdvertisedItems
+                  key={advertise._id}
+                  advertise={advertise}
+                  setBookingData={setBookingData}
+                />
+              ))}
+            </div> */}
+
+            <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
+              {advertises.map((advertise) => (
+                <AdvertisedItems
+                  key={advertise._id}
+                  advertise={advertise}
+                  setBookingData={setBookingData}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          " "
+        )}
+
+        <div>
+          {/* MOdal content*/}
+          {bookingData && (
+            <BookModal
+              bookingData={bookingData}
+              closeModal={closeModal}
+              booking={booking}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

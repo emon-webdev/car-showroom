@@ -23,12 +23,12 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-[1400px] mx-auto my-12">
-      <h2 className="text-center text-[#e0c83d] my-8 text-4xl font-bold">
+      <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
         My Orders
       </h2>
       <h2 className="text-center my-8 text-xl font-bold">
         If you are showing orders then you must be Booking{" "}
-        <span className="text-[#e0c83d]">home - Category - Book now</span> Order{" "}
+        <span className="text-[#df0303]">home - Category - Book now</span> Order{" "}
       </h2>
 
       <div>

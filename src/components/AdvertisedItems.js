@@ -1,10 +1,63 @@
 import React from "react";
-import { BsCheckCircleFill } from "react-icons/bs";
-
+import { BiTimeFive } from "react-icons/bi";
+import { BsSpeedometer2 } from "react-icons/bs";
+import { GoLocation } from "react-icons/go";
 const AdvertisedItems = ({ advertise, setBookingData }) => {
+  const {
+    location,
+    date,
+    category,
+    resalePrice,
+    verifyUser,
+    sellerImg,
+    sellerName,
+    img,
+  } = advertise;
   return (
-    <div>
-      <div
+    <>
+      <div className="card card-compact rounded bg-base-100 shadow-xl">
+        <figure className="max-h-[200px] w-full">
+          <img className="max-h-[200px] h-[200px]" src={img} alt="car!" />
+          {/* <img src="https://placeimg.com/400/225/arch" alt="car!" /> */}
+        </figure>
+        <div className="card-body justify-between">
+          <div className="user__meta">
+            <div className="avater">
+              <img className="rounded-full" src={sellerImg} alt="User" />
+              <div>
+                <h6 className="font-light ml-3 text-secondary">{sellerName}</h6>
+              </div>
+            </div>
+            <div className="post-date">
+              <BiTimeFive className="inline-block text-primary text-lg mr-2"></BiTimeFive>
+              <span className="text-secondary font-light">{date}</span>
+            </div>
+          </div>
+          <h2 className="card-title text-secondary mt-2">{category}</h2>
+          <div>
+            <span className=" text-xs text-[#949494] uppercase">Price</span>
+            <span className="text-lg text-primary block font-medium">
+              BDT $ {resalePrice}
+            </span>
+          </div>
+          <div className="flex justify-between items-center mt-3">
+            <div>
+              <GoLocation className="inline-block text-primary text-lg"></GoLocation>
+              <span className="text-secondary ml-2">{location}</span>
+            </div>
+            <div>
+              <BsSpeedometer2 className="inline-block text-primary text-lg"></BsSpeedometer2>
+              <span className="text-secondary ml-2">65,000 km</span>
+            </div>
+          </div>
+          <div className="card-actions mt-3">
+            <button className="btn btn-outline btn-primary w-full rounded">
+              See More!
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* <div
         key={advertise._id}
         className="card card-compact w-96 bg-base-100 shadow-xl"
       >
@@ -43,14 +96,14 @@ const AdvertisedItems = ({ advertise, setBookingData }) => {
             <label
               htmlFor="book-now"
               onClick={() => setBookingData(advertise)}
-              className="btn btn-primary btn-sm"
+              className="primary-btn"
             >
               Book Now
             </label>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 };
 

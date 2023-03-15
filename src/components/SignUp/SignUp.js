@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import signUpimg from "../../assets/img/lexus1.jpg";
 import { AuthContext } from "../../contexts/AuthProvider";
-
 const SignUp = () => {
   const {
     register,
@@ -77,14 +77,21 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-[800px] flex justify-center items-center">
-      <div
-        className="w-96 h-[730px] p-7"
-        style={{
-          boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
-          borderRadius: "18px",
-        }}
-      >
+    <div
+      className="h-screen md:max-w-6xl max-w-3xl mx-auto md:flex justify-around items-center"
+      // style={{
+      //   boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
+      //   borderRadius: "18px",
+      // }}
+    >
+      <div className="hidden md:block w-6/12">
+        <p className="font-bold text-4xl my-4 uppercase text-[#df0303] text-center">
+          welcome to car showroom
+        </p>
+
+        <img src={signUpimg} alt="" srcset="" />
+      </div>
+      <div className="w-96 mx-auto md:mx-0 p-7">
         <h2 className="text-4xl mb-7 font-medium text-center">Sign Up</h2>
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full mb-2">
@@ -188,7 +195,7 @@ const SignUp = () => {
             {/* {signUpError && <p className="text-red-600">{signUpError}</p>} */}
           </div>
           <input
-            className="btn btn-accent bg-[#e0c83d] border-[#e0c83d] text-white w-full"
+            className="primary-btn w-full bg-[#df030]"
             value="Sign Up"
             type="submit"
           />
@@ -196,7 +203,7 @@ const SignUp = () => {
         <div>
           <p className="text-[12px] mt-[10px] text-center text-[#000000]">
             Already have an account?{" "}
-            <Link to="/signin" className="text-[#e0c83d]">
+            <Link to="/signin" className="font-bold text-[#df0303]">
               Please Sign In
             </Link>
           </p>
@@ -205,7 +212,7 @@ const SignUp = () => {
           <div>
             <button
               onClick={handleGoogleSignIn}
-              className="btn btn-outline w-full"
+              className="primary-btn w-full"
             >
               CONTINUE WITH GOOGLE
             </button>

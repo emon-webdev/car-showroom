@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import signUpimg from "../../assets/img/lexus2.jpg";
 import { AuthContext } from "../../contexts/AuthProvider";
+
 const SignIn = () => {
   const {
     register,
@@ -74,14 +76,21 @@ const SignIn = () => {
   };
 
   return (
-    <div className="h-[800px] flex justify-center items-center">
-      <div
-        className="w-96 h-[500px] p-7"
-        style={{
-          boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
-          borderRadius: "18px",
-        }}
-      >
+    <div
+      className="h-screen md:max-w-6xl max-w-3xl mx-auto md:flex justify-around items-center"
+      // style={{
+      //   boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
+      //   borderRadius: "18px",
+      // }}
+    >
+      <div className="hidden md:block w-6/12">
+        <p className="font-bold text-4xl my-4 uppercase text-[#df0303] text-center">
+          welcome to car showroom
+        </p>
+
+        <img src={signUpimg} alt="" srcset="" />
+      </div>
+      <div className="w-96 mx-auto md:mx-0 p-7">
         <h2 className="text-4xl mb-8 font-medium text-center">Sign In</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full mb-2">
@@ -150,7 +159,7 @@ const SignIn = () => {
             )}
           </div>
           <input
-            className="btn btn-accent text-white w-full"
+            className="primary-btn w-full bg-[#df0303]"
             value="Login"
             type="submit"
           />
@@ -158,17 +167,16 @@ const SignIn = () => {
         <div>
           {/* {loginError && <p className="text-red-600">{loginError}</p>} */}
           <p className="text-[12px] mt-[10px] text-center text-[#000000]">
-            New to Doctors Portal?{" "}
-            <Link to="/signup" className="text-[#19D3AE]">
+            New to Car Showroom?{" "}
+            <Link to="/signup" className="font-bold text-[#df0303]">
               Create new Account
             </Link>
           </p>
           <div className="divider">OR</div>
-
           <div>
             <button
               onClick={handleGoogleSignIn}
-              className="btn btn-outline w-full"
+              className="primary-btn w-full"
             >
               CONTINUE WITH GOOGLE
             </button>

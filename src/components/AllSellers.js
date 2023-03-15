@@ -71,7 +71,7 @@ const AllSellers = () => {
   return (
     <div>
       <h1 className="text-5xl my-8 font-bold text-center">
-        <span className="text-[#e0c83d]">All Sellers</span>
+        <span className="text-[#df0303]">All Sellers</span>
       </h1>
 
       <div>

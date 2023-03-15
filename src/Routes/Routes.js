@@ -34,18 +34,12 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-
       {
-        path: "/category/:id",
-        element: (
-          <PrivateRoute>
-            <CategoryProducts />
-          </PrivateRoute>
-        ),
+        path: "/category/:name",
+        element: <CategoryProducts />,
         loader: ({ params }) =>
-          fetch(`https://car-showroom-server.vercel.app/category/${params.id}`),
+          fetch(`http://localhost:5000/category/${params.name}`),
       },
-
       {
         path: "/advertise",
         element: <AdvertisedItems />,

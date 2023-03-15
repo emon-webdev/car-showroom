@@ -24,7 +24,7 @@ const MyBuyers = () => {
 
   return (
     <div className="max-w-[1400px] mx-auto my-12">
-      <h2 className="text-center text-[#e0c83d] my-8 text-4xl font-bold">
+      <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
         My Buyers
       </h2>
 

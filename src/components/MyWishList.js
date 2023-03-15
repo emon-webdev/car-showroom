@@ -4,14 +4,14 @@ const MyWishList = () => {
   return (
     <div>
       <div>
-        <h2 className="text-center text-[#e0c83d] my-8 text-4xl font-bold">
+        <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
           My Wish List
         </h2>
-        <h2 className="text-center text-[#e0c83d] my-8 text-2xl font-bold">
+        <h2 className="text-center text-[#df0303] my-8 text-2xl font-bold">
           Coming Soon (Optional Task)
         </h2>
         <div>
-          <h2 className=" text-[#e0c83d] my-8 text-2xl font-bold">
+          <h2 className=" text-[#df0303] my-8 text-2xl font-bold">
             User Account:
           </h2>
           <p className="text-xl">Email: seller@gmail.com</p>

@@ -1,4 +1,24 @@
-.primary-btn {
+
+/* #df0303 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #010c3a;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+}
+p {
+  color: #252525;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.container{
+  margin: 0 auto;
 }
 .primary-btn {
   font-style: normal;
@@ -12,9 +32,54 @@
   color: #ffffff;
   padding: 0 33px;
   border: none;
+  cursor: pointer;
   transition: 0.3s;
 }
 .primary-btn:hover {
-  background: #222;
+  background: #010c3a;
   border: none;
+}
+.counter-area {
+  position: relative;
+  z-index: 999;
+}
+
+.counter-area::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #333;
+  opacity: 0.6;
+  z-index: -1;
+}
+form [type="submit"] {
+  background-color: #df0303;
+}
+
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
+  background-color: #df0303 !important;
+  color: #ffffff;
+}
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):hover) {
+  background-color: #df0303 !important;
+  color: #ffffff !important;
+}
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):focus),
+.menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):hover) {
+  background-color: #df0303 !important;
+  color: #ffffff !important;
+}
+.slider-item.max-w-lg.border {
+  padding: 24px;
+  margin: 0 auto;
+}
+/* Hero area */
+.hero__area {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 27 45 / var(--tw-bg-opacity));
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }

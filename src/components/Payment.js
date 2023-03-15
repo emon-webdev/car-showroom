@@ -6,25 +6,25 @@ const Payment = () => {
   console.log(booking);
   return (
     <div>
-      <h2 className=" text-[#e0c83d] my-8 text-4xl font-bold">
+      <h2 className=" text-[#df0303] my-8 text-4xl font-bold">
         Payment Method
       </h2>
       <h2 className="my-3 text-2xl font-bold">Product Details:</h2>
       <h2 className="text-xl font-bold">
-        Payment: <span className="text-[#e0c83d]">{booking?.productName}</span>
+        Payment: <span className="text-[#df0303]">{booking?.productName}</span>
       </h2>
       <h2 className="text-xl font-bold">
-        Price: <span className="text-[#e0c83d]">$ {booking?.resalePrice}</span>
+        Price: <span className="text-[#df0303]">$ {booking?.resalePrice}</span>
       </h2>
       <h2 className="text-xl font-bold">
-        Location: <span className="text-[#e0c83d]">$ {booking?.location}</span>
+        Location: <span className="text-[#df0303]">$ {booking?.location}</span>
       </h2>
       <h2 className="my-3 text-2xl font-bold">Buyer Details: </h2>
       <h2 className="text-xl font-bold">
-        Name: <span className="text-[#e0c83d]"> {booking?.name}</span>
+        Name: <span className="text-[#df0303]"> {booking?.name}</span>
       </h2>
       <h2 className="text-xl font-bold">
-        Email: <span className="text-[#e0c83d]"> {booking?.email}</span>
+        Email: <span className="text-[#df0303]"> {booking?.email}</span>
       </h2>
     </div>
   );

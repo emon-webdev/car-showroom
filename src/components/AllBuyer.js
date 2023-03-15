@@ -15,7 +15,7 @@ const AllBuyer = () => {
   return (
     <div>
       <h1 className="text-5xl my-8 font-bold text-center">
-        <span className="text-[#e0c83d]">All Buyer</span>
+        <span className="text-[#df0303]">All Buyer</span>
       </h1>
       <div>
         <div className="overflow-x-auto">

@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="footer md:w-11/12 px-4 md:px-0 mx-auto items-center border-t-2 p-4  text-[#232F4B]">
       <div className="items-center grid-flow-col">
         <a className="text-[#232F4B] text-[30px] font-bold text-xl" href="/">
-          Car Showroom
+          Car Rental
         </a>
         <p>Copyright © 2022 - All right reserved</p>
       </div>

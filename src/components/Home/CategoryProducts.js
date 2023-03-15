@@ -10,7 +10,6 @@ const CategoryProducts = () => {
   const category = useLoaderData();
   const [bookingData, setBookingData] = useState(null);
   const navigation = useNavigation();
-
   const {
     data: products = [],
     refetch,
@@ -19,20 +18,19 @@ const CategoryProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `https://car-showroom-server.vercel.app/products/${category.category}`
+        `http://localhost:5000/products/${category.name}`
       );
       const data = res.json();
       return data;
     },
   });
-
+  console.log(products);
   const closeModal = () => {
     setBookingData(null);
   };
   const booking = (event) => {
     event.preventDefault();
     setBookingData(null);
-
     const form = event.target;
     const productName = form.title.value;
     const resalePrice = form.resalePrice.value;
@@ -113,13 +111,13 @@ const CategoryProducts = () => {
   return (
     <div className="mb-12">
       <h1 className="text-5xl my-8 font-bold text-center">
-        <span className="text-[#e0c83d]">Item Wise Same Category Products</span>
+        <span className="text-[#df0303]">Item Wise Same Category Products</span>
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((categoryProduct) => (
           <div
             key={categoryProduct._id}
-            className="card card-compact w-96 bg-base-100 shadow-xl"
+            className="card card-compact rounded-sm w-96 bg-base-100 shadow-xl"
           >
             <figure>
               <img src={categoryProduct.img} alt="Shoes" />
@@ -160,14 +158,14 @@ const CategoryProducts = () => {
               <div className="card-actions justify-between">
                 <button
                   onClick={() => handleReport(categoryProduct._id)}
-                  className="btn btn-primary"
+                  className="primary-btn"
                 >
                   Report
                 </button>
                 <label
                   htmlFor="book-now"
                   onClick={() => setBookingData(categoryProduct)}
-                  className="btn btn-primary"
+                  className="primary-btn"
                 >
                   Book Now
                 </label>
