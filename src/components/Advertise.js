@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { ImBullhorn } from "react-icons/im";
 import AdvertisedItems from "./AdvertisedItems";
 import BookModal from "./Home/BookModal";
+import Loading from "./Loading";
 const Advertise = () => {
   const [bookingData, setBookingData] = useState(null);
   const {
@@ -104,16 +105,21 @@ const Advertise = () => {
                 Advertisements
               </span>
             </h2>
-
-            <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
-              {advertises.map((advertise) => (
-                <AdvertisedItems
-                  key={advertise._id}
-                  advertise={advertise}
-                  setBookingData={setBookingData}
-                />
-              ))}
-            </div>
+            <>
+              {advertises.length ? (
+                <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
+                  {advertises.map((advertise) => (
+                    <AdvertisedItems
+                      key={advertise._id}
+                      advertise={advertise}
+                      setBookingData={setBookingData}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <Loading />
+              )}
+            </>
           </>
         ) : (
           " "

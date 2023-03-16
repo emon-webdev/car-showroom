@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import signUpimg from "../../assets/img/lexus1.jpg";
 import { AuthContext } from "../../contexts/AuthProvider";
+import DynamicBanner from "../Shared/DynamicBanner";
 const SignUp = () => {
   const {
     register,
@@ -73,149 +73,144 @@ const SignUp = () => {
   };
 
   return (
-    <div
-      className="h-screen md:max-w-6xl max-w-3xl mx-auto md:flex justify-around items-center"
-      // style={{
-      //   boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
-      //   borderRadius: "18px",
-      // }}
-    >
-      <div className="hidden md:block w-6/12">
-        <p className="font-bold text-4xl my-4 uppercase text-[#df0303] text-center">
-          welcome to car showroom
-        </p>
+    <>
+      <DynamicBanner title="Sign Up Page" />
+      <div className="py-12  md:max-w-6xl max-w-3xl mx-auto md:flex justify-around items-center">
+        <div
+          className="max-w-[460px] w-full mx-auto md:mx-0 p-7"
+          style={{
+            boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)",
+            borderRadius: "8px",
+          }}
+        >
+          <h2 className="text-4xl mb-7 font-medium text-center">Sign Up</h2>
+          <form onSubmit={handleSubmit(handleSignUp)}>
+            <div className="form-control w-full mb-2">
+              <label className="label py-1">
+                {" "}
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                {...register("name", {
+                  required: "Name is required",
+                })}
+                className="input input-bordered w-full"
+              />
+              {errors.email && (
+                <p className="text-red-600">{errors.name?.message}</p>
+              )}
+            </div>
 
-        <img src={signUpimg} alt="" srcset="" />
-      </div>
-      <div className="w-96 mx-auto md:mx-0 p-7">
-        <h2 className="text-4xl mb-7 font-medium text-center">Sign Up</h2>
-        <form onSubmit={handleSubmit(handleSignUp)}>
-          <div className="form-control w-full mb-2">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Name</span>
-            </label>
+            <div className="form-control w-full mb-2">
+              <label className="label py-1">
+                {" "}
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                className="input input-bordered w-full"
+              />
+              {errors.email && (
+                <p className="text-red-600">{errors.email?.message}</p>
+              )}
+              {signUpError.email && (
+                <p className="text-red-600">{signUpError.email?.message}</p>
+              )}
+            </div>
+            <div className="form-control w-full mb-2">
+              <label className="label py-1">
+                {" "}
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                {...register("photoURL", {
+                  required: "Photo Url is required",
+                })}
+                className="input input-bordered w-full"
+              />
+              {errors.email && (
+                <p className="text-red-600">{errors.email?.message}</p>
+              )}
+              {signUpError.email && (
+                <p className="text-red-600">{signUpError.email?.message}</p>
+              )}
+            </div>
+
+            <div className="form-control w-full mb-2">
+              <label className="label py-1">
+                {" "}
+                <span className="label-text">Your Role</span>
+              </label>
+
+              <select
+                {...register("role")}
+                className="input input-bordered w-full"
+              >
+                <option defaultValue="seller">Seller</option>
+                <option value="buyer">Buyer</option>
+              </select>
+
+              <small className="text-danger">
+                {errors?.role && errors.role.message}
+              </small>
+            </div>
+
+            <div className="form-control w-full mb-4">
+              <label className="label py-1">
+                {" "}
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be 6 characters or longer",
+                  },
+                  pattern: {
+                    // value: /[a-zA-Z0-9]/,
+                    message: "Password must be Strong",
+                  },
+                })}
+                className="input input-bordered w-full"
+              />
+              {errors.password && (
+                <p className="text-red-600">{errors.password?.message}</p>
+              )}
+            </div>
             <input
-              type="text"
-              {...register("name", {
-                required: "Name is required",
-              })}
-              className="input input-bordered w-full"
+              className="primary-btn w-full bg-[#df030]"
+              value="Sign Up"
+              type="submit"
             />
-            {errors.email && (
-              <p className="text-red-600">{errors.name?.message}</p>
-            )}
-          </div>
-
-          <div className="form-control w-full mb-2">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "Email Address is required",
-              })}
-              className="input input-bordered w-full"
-            />
-            {errors.email && (
-              <p className="text-red-600">{errors.email?.message}</p>
-            )}
-            {signUpError.email && (
-              <p className="text-red-600">{signUpError.email?.message}</p>
-            )}
-          </div>
-          <div className="form-control w-full mb-2">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Photo URL</span>
-            </label>
-            <input
-              type="text"
-              {...register("photoURL", {
-                required: "Photo Url is required",
-              })}
-              className="input input-bordered w-full"
-            />
-            {errors.email && (
-              <p className="text-red-600">{errors.email?.message}</p>
-            )}
-            {signUpError.email && (
-              <p className="text-red-600">{signUpError.email?.message}</p>
-            )}
-          </div>
-
-          <div className="form-control w-full mb-2">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Your Role</span>
-            </label>
-
-            <select
-              {...register("role")}
-              className="input input-bordered w-full"
-            >
-              <option defaultValue="seller">Seller</option>
-              <option value="buyer">Buyer</option>
-            </select>
-
-            <small className="text-danger">
-              {errors?.role && errors.role.message}
-            </small>
-          </div>
-
-          <div className="form-control w-full mb-4">
-            <label className="label py-1">
-              {" "}
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be 6 characters or longer",
-                },
-                pattern: {
-                  // value: /[a-zA-Z0-9]/,
-                  message: "Password must be Strong",
-                },
-              })}
-              className="input input-bordered w-full"
-            />
-            {errors.password && (
-              <p className="text-red-600">{errors.password?.message}</p>
-            )}
-            {/* {signUpError && <p className="text-red-600">{signUpError}</p>} */}
-          </div>
-          <input
-            className="primary-btn w-full bg-[#df030]"
-            value="Sign Up"
-            type="submit"
-          />
-        </form>
-        <div>
-          <p className="text-[12px] mt-[10px] text-center text-[#000000]">
-            Already have an account?{" "}
-            <Link to="/signin" className="font-bold text-[#df0303]">
-              Please Sign In
-            </Link>
-          </p>
-          <div className="divider">OR</div>
-
+          </form>
           <div>
-            <button
-              onClick={handleGoogleSignIn}
-              className="primary-btn w-full"
-            >
-              CONTINUE WITH GOOGLE
-            </button>
+            <p className="text-[12px] mt-[10px] text-center text-[#000000]">
+              Already have an account?{" "}
+              <Link to="/signin" className="font-bold text-[#df0303]">
+                Please Sign In
+              </Link>
+            </p>
+            <div className="divider">OR</div>
+
+            <div>
+              <button
+                onClick={handleGoogleSignIn}
+                className="primary-btn w-full"
+              >
+                CONTINUE WITH GOOGLE
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

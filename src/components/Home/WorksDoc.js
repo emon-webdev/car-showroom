@@ -15,7 +15,6 @@ const WorksDoc = () => {
           </p>
         </div>
 
-        <div></div>
         <div className="text-center border-4  border-[#010C3A] rounded-sm p-12 bg-[#df0303] text-white max-w-md mx-auto">
           <h2 class="phone-title text-xl text-white">
             Have a question? Call us{" "}

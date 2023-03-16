@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { BiCategory } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 const Category = () => {
   // const categories = ["toyota", "lexus", "bmw", "Mercedes"];
   const {
@@ -11,7 +12,9 @@ const Category = () => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch(`https://car-showroom-server.vercel.app/categories`);
+      const res = await fetch(
+        `https://car-showroom-server.vercel.app/categories`
+      );
       const data = await res.json();
       return data;
     },
@@ -30,24 +33,35 @@ const Category = () => {
             Category
           </span>
         </h2>
-        <div className="grid gap-2 md:grid-cols-4 grid-cols-2 mt-12">
-          {categories?.map((category, i) => (
-            <Link
-              to={`/category/${category?.name}`}
-              key={category._id}
-              className="category"
-            >
-              <div className="text-center">
-                <h4 className="text-[#010c3a] uppercase text-xl font-semibold mb-3 ">
-                  {category?.name}
-                </h4>
-                <div className="icon m-auto">
-                  <img src={category?.picture} alt={category?.name} />
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+
+        <>
+          {categories.length ? (
+            <div className="grid gap-2 md:grid-cols-4 grid-cols-2 mt-12">
+              {categories?.map((category, i) => (
+                <Link
+                  to={`/category/${category?.name}`}
+                  key={category._id}
+                  className="category border border-gray-400"
+                >
+                  <div className="text-center">
+                    <h4 className="text-[#010c3a] uppercase text-xl font-semibold mb-3 ">
+                      {category?.name}
+                    </h4>
+                    <div className="icon m-auto">
+                      <img
+                        className="w-[80px] m-auto h-[80px] "
+                        src={category?.picture}
+                        alt={category?.name}
+                      />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Loading />
+          )}
+        </>
       </div>
     </div>
   );

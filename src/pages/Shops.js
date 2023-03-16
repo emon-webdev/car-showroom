@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { ImBullhorn } from "react-icons/im";
+import { useLocation } from "react-router-dom";
 import SingleShopItems from "../components/Home/SingleShopItems";
+import Loading from "../components/Loading";
 import DynamicBanner from "../components/Shared/DynamicBanner";
 const Shops = () => {
   // const { count, products } = useLoaderData();
+  const { pathname } = useLocation();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [count, setCount] = useState(10);
@@ -15,7 +17,8 @@ const Shops = () => {
   const searchRef = useRef();
   useEffect(() => {
     fetch(
-      `https://car-showroom-server.vercel.app/products?search=${search}&page=${page}&size=${size}`
+      `https://car-showroom-server.vercel.app/products?page=${page}&size=${size}&search=${search}`
+      // `http://localhost:5000/products`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -49,7 +52,7 @@ const Shops = () => {
 
   return (
     <div>
-      <DynamicBanner title="Shops" />
+      {pathname.includes("shops") && <DynamicBanner title="Shops" />}
       <div className="shops-products py-16">
         <div className="container">
           <h2 className="text-4xl font-bold mb-7 text-center title__before">
@@ -58,29 +61,7 @@ const Shops = () => {
               All Products
             </span>
           </h2>
-          <div className="product-filter flex items-center justify-center  py-3">
-            {/* <div className="sort-product"></div> */}
-            <div className="product-search flex items-center justify-between">
-              <input
-                ref={searchRef}
-                type="text"
-                placeholder="Search Product"
-                className="input text-[#333] input-bordered border-[#ddd] rounded-[0px] w-full"
-              />
-              <button
-                onClick={handleSearch}
-                className="btn btn-square rounded-[0px] btn-outline"
-              >
-                <AiOutlineSearch className="text-[22px]" />
-              </button>
-            </div>
-          </div>
-          <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
-            {products?.map((product) => (
-              <SingleShopItems product={product} />
-            ))}
-          </div>
-          <div className="pagination mt-8 text-center">
+          <div className="pagination mt-8 text-end">
             <div className="btn-group shadow-lg">
               {[...Array(pages).keys()].map((number) => (
                 <button
@@ -96,7 +77,6 @@ const Shops = () => {
                 onChange={(event) => setSize(event.target.value)}
                 className="select"
               >
-                <option value="5">Select</option>
                 <option value="5">5</option>
                 <option value="10" selected>
                   10
@@ -106,6 +86,19 @@ const Shops = () => {
               </select>
             </div>
           </div>
+          <>
+            {products.length ? (
+              <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
+                <>
+                  {products?.map((product) => (
+                    <SingleShopItems product={product} />
+                  ))}
+                </>
+              </div>
+            ) : (
+              <Loading />
+            )}
+          </>
         </div>
       </div>
     </div>

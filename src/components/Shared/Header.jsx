@@ -7,7 +7,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.log(error.message);
       });
@@ -23,6 +23,11 @@ const Header = () => {
       <li>
         <Link className="text-[#010C3A]" to="/shops">
           Shops
+        </Link>
+      </li>
+      <li>
+        <Link className="text-[#010C3A]" to="/project-docs">
+          Project Docs
         </Link>
       </li>
       <li>

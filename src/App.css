@@ -111,3 +111,10 @@ form [type="submit"] {
   background: #df0303;
   font-weight: 700;
 }
+.form-control.w-full.mb-2 {
+  color: #010c3a;
+}
+
+.form-control .label span {
+  color: #333;
+}

@@ -1,22 +1,20 @@
 import React from "react";
+import Shops from "../../pages/Shops";
 import Advertise from "../Advertise";
 import Category from "./Category";
-import ClientSay from "./ClientSay";
 import Counter from "./Counter";
 import Hero from "./Hero";
-import WorksDoc from "./WorksDoc";
+import WhyCarResell from "./WhyCarResell";
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      {/* <Banner /> */}
-      <WorksDoc />
       <Category />
-      {/* <Advertisements/> */}
       <Advertise />
+      <Shops />
       <Counter />
-      <ClientSay />
+      <WhyCarResell />
     </div>
   );
 };
