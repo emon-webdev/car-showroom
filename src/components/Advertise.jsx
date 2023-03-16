@@ -95,47 +95,56 @@ const Advertise = () => {
   }
 
   return (
-    <div className="advertisements-area md:py-16 py-12">
-      <div className="container">
-        {advertises?.length > 0 ? (
-          <>
-            <h2 className="text-4xl font-bold mb-7 text-center title__before">
-              <span className="bg-white px-6">
-                <ImBullhorn className="mr-3 inline-block text-primary"></ImBullhorn>
-                Advertisements
-              </span>
-            </h2>
-            <>
-              {advertises.length ? (
-                <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
-                  {advertises.map((advertise) => (
-                    <AdvertisedItems
-                      key={advertise._id}
-                      advertise={advertise}
-                      setBookingData={setBookingData}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <Loading />
+    <>
+      {advertises?.length > 0 ?
+        <div className="advertisements-area md:py-16 py-12">
+          <div className="container">
+            {advertises?.length > 0 ? (
+              <>
+                <h2 className="text-4xl font-bold mb-7 text-center title__before">
+                  <span className="bg-white px-6">
+                    <ImBullhorn className="mr-3 inline-block text-primary"></ImBullhorn>
+                    Advertisements
+                  </span>
+                </h2>
+                <>
+                  {advertises.length ? (
+                    <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-12">
+                      {advertises.map((advertise) => (
+                        <AdvertisedItems
+                          key={advertise._id}
+                          advertise={advertise}
+                          setBookingData={setBookingData}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <Loading />
+                  )}
+                </>
+              </>
+            ) : (
+              " "
+            )}
+            <div>
+              {/* MOdal content*/}
+              {bookingData && (
+                <BookModal
+                  bookingData={bookingData}
+                  closeModal={closeModal}
+                  booking={booking}
+                />
               )}
-            </>
-          </>
-        ) : (
-          " "
-        )}
-        <div>
-          {/* MOdal content*/}
-          {bookingData && (
-            <BookModal
-              bookingData={bookingData}
-              closeModal={closeModal}
-              booking={booking}
-            />
-          )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+        :
+        (
+          " "
+        )
+      }
+    </>
   );
 };
 

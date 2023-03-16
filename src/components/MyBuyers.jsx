@@ -16,15 +16,14 @@ const MyBuyers = () => {
     },
   });
 
-  console.log(bookings);
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto my-12">
-      <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
+    <div className="max-w-[1400px] mx-auto mb-12">
+      <h2 className="text-center text-[#010c3a] mb-8 text-4xl font-bold">
         My Buyers
       </h2>
 

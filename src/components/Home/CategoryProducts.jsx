@@ -1,30 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
-import Loading from "../Loading";
 import DynamicBanner from "../Shared/DynamicBanner";
 import BookModal from "./BookModal";
 
 const CategoryProducts = () => {
-  const category = useLoaderData();
+  const products = useLoaderData();
   const [bookingData, setBookingData] = useState(null);
   const navigation = useNavigation();
-  const {
-    data: products = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await fetch(
-        `https://car-showroom-server.vercel.app/products/${category.name}`
-      );
-      const data = res.json();
-      return data;
-    },
-  });
+
+  // const {
+  //   data: products = [],
+  //   refetch,
+  //   isLoading,
+  // } = useQuery({
+  //   queryKey: ["products"],
+  //   queryFn: async () => {
+  //     const res = await fetch(
+  //       `https://car-showroom-server.vercel.app/products/${category.name}`
+  //     );
+  //     const data = res.json();
+  //     return data;
+  //   },
+  // });
+
   const closeModal = () => {
     setBookingData(null);
   };
@@ -84,7 +84,8 @@ const CategoryProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        refetch();
+        // refetch();
+        window.location.reload();
       });
   };
 
@@ -103,9 +104,9 @@ const CategoryProducts = () => {
       });
   };
 
-  if (navigation.state === "loading" || isLoading) {
-    return <Loading></Loading>;
-  }
+  // if (navigation.state === "loading" || isLoading) {
+  //   return <Loading></Loading>;
+  // }
 
   return (
     <>

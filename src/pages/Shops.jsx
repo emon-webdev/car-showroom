@@ -18,7 +18,6 @@ const Shops = () => {
   useEffect(() => {
     fetch(
       `https://car-showroom-server.vercel.app/products?page=${page}&size=${size}&search=${search}`
-      // `http://localhost:5000/products`
     )
       .then((res) => res.json())
       .then((data) => {

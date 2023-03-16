@@ -1,18 +1,18 @@
 import React from "react";
 
 const SingleProduct = ({ product, handleDelete, addAdvertise }) => {
-  const { img, description, price, title, status, booked } = product;
+  const { img, description, resalePrice, title, status, booked } = product;
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card card-compact rounded bg-base-100 shadow-xl">
       <figure>
-        <img src={img} alt="img" />
+        <img className="max-h-[175px] w-full h-[175px]" src={img} alt="img" />
       </figure>
-      <div className="card-body">
+      <div className="card-body justify-between">
         <h2 className="card-title">
           {title}
           <div className="badge badge-secondary">{status}</div>
         </h2>
-        <h2 className="card-title">Price: ${price}</h2>
+        <h2 className="card-title">Price: ${resalePrice}</h2>
         <p>{description}</p>
 
         <div className="card-actions">

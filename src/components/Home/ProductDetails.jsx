@@ -1,7 +1,7 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import aircon from "../../assets/air-con.svg";
-import avater from "../../assets/avatar.jpeg";
 import bodyType from "../../assets/body-type.svg";
 import driveType from "../../assets/drive-type.svg";
 import engine from "../../assets/engine.svg";
@@ -12,9 +12,28 @@ import year from "../../assets/year.svg";
 
 const ProductDetails = () => {
   const singleProduct = useLoaderData();
-  const { img, resalePrice } = singleProduct;
+  const { img, _id, sellerImg, sellerName, email, resalePrice } = singleProduct;
+  console.log(singleProduct)
+  const navigation = useNavigation();
+  // report product
+  const handleReport = (id) => {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ report: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.error("Successfully report this product");
+      });
+  };
+
+
   return (
-    <div className="bg-[#f0f3f8] py-16">
+    <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8">
           {/* Car Featured */}
@@ -131,29 +150,47 @@ const ProductDetails = () => {
 
           {/* User Information */}
           <div className="">
-            <div className="bg__drop text-primary font-bold text-2xl text-center p-8">
+            <div className="bg__drop shadow-md text-primary font-bold text-2xl text-center p-8">
               Price: $ {resalePrice}
             </div>
-            <div className="mt-5 bg__drop p-8">
+            <div className="mt-5 bg__drop p-8  shadow-md">
               <div className="inline-flex items-center mb-5">
                 <img
-                  className="rounded-full"
-                  src={avater}
+                  className="rounded-full h-[100px] w-[100px]"
+                  src={sellerImg}
                   alt="Ferdous Munir"
                 />
                 <div className="ml-3">
-                  <h4 className="text-xl text-secondary">Ferdous Munir</h4>
-                  <span>01752521215</span>
+                  <h4 className="text-xl text-secondary">{sellerName}</h4>
+                  <span>{email}</span>
                 </div>
               </div>
-              <button className="btn btn-outline btn-error w-full rounded">
+              {/* <button className="btn btn-outline btn-error w-full rounded">
                 Report this add
+              </button> */}
+              <button
+                onClick={() => handleReport(_id)}
+                className="btn btn-outline btn-error w-full rounded">
+
+                Report
               </button>
+
               <button className="mt-5 btn btn-active btn-secondary w-full rounded">
                 Book Now!
               </button>
+
+              <label htmlFor="my-modal-3" className="btn">open modal</label>
             </div>
           </div>
+        </div>
+      </div>
+      {/* MOdal content*/}
+      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
+          <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
         </div>
       </div>
     </div>

@@ -69,7 +69,7 @@ p {
   z-index: 99;
 }
 a.category:hover {
-  background: #ddd;
+  background: #fff;
 }
 
 a.category {
@@ -117,4 +117,7 @@ form [type="submit"] {
 
 .form-control .label span {
   color: #333;
+}
+ul.menu.p-4.w-80.bg-base-100.text-base-content li {
+  border-bottom: 1px solid;
 }

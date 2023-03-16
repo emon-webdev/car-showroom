@@ -31,45 +31,86 @@ const DashbordRoot = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <Link to="/dashboard">My WishList</Link>
+              <Link className="text-[#010c3a] font-semibold" to="/dashboard">
+                My WishList
+              </Link>
             </li>
             {isAdmin && (
               <>
                 <li>
-                  <Link to="/dashboard/allBuyer">All Buyers</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/allBuyer"
+                  >
+                    All Buyers
+                  </Link>
                 </li>
 
                 <li>
-                  <Link to="/dashboard/allSeller">All Sellers</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/allSeller"
+                  >
+                    All Sellers
+                  </Link>
                 </li>
 
                 <li>
-                  <Link to="/dashboard/reportedItem">Reported Items</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/reportedItem"
+                  >
+                    Reported Items
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/allUsers">All Users</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/allUsers"
+                  >
+                    All Users
+                  </Link>
                 </li>
               </>
             )}
             {isSeller && (
               <>
                 <li>
-                  <Link to="/dashboard/addProduct">Add Product</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/addProduct"
+                  >
+                    Add Product
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myProducts">My Products</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/myProducts"
+                  >
+                    My Products
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myBuyers">My buyers</Link>
+                  <Link
+                    className="text-[#010c3a] font-semibold"
+                    to="/dashboard/myBuyers"
+                  >
+                    My buyers
+                  </Link>
                 </li>
               </>
             )}
             {isBuyer && (
               <li>
-                <Link to="/dashboard/myOrders">My Orders</Link>
+                <Link
+                  className="text-[#010c3a] font-semibold"
+                  to="/dashboard/myOrders"
+                >
+                  My Orders
+                </Link>
               </li>
             )}
-            
           </ul>
         </div>
       </div>

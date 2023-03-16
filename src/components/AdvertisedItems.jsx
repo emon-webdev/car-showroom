@@ -43,7 +43,7 @@ const AdvertisedItems = ({ advertise, setBookingData }) => {
           <div>
             <span className=" text-xs text-[#949494] uppercase">Price</span>
             <span className="text-lg text-primary block font-medium">
-              BDT $ {resalePrice}
+              USD $ {resalePrice}
             </span>
           </div>
           <div className="flex justify-between items-center mt-3">

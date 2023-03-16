@@ -1,9 +1,9 @@
 import React from "react";
 import { BiTimeFive } from "react-icons/bi";
-import { Link } from "react-router-dom";
-const SingleShopItems = ({ product }) => {
+import { Link, useLocation } from "react-router-dom";
+const SingleShopItems = ({ product, handleDelete }) => {
   const { _id, img, resalePrice, sellerImg, sellerName, title, date } = product;
-
+  const { pathname } = useLocation();
   return (
     <Link
       to={`/product-details/${_id}`}
@@ -12,7 +12,7 @@ const SingleShopItems = ({ product }) => {
       <figure>
         <img className="w-full h-[225px]" src={img} alt="car!" />
       </figure>
-      <div className="card-body">
+      <div className="card-body justify-between">
         <div className="user__meta">
           <div className="avater">
             <img
@@ -34,6 +34,19 @@ const SingleShopItems = ({ product }) => {
             $ {resalePrice}
           </span>
         </div>
+
+
+        {pathname.includes("/dashboard/reportedItem") && (
+          <div className="card-actions mt-3">
+            <button
+              onClick={() => handleDelete(_id)}
+              className="btn btn-outline btn-primary w-full rounded"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+
       </div>
     </Link>
   );

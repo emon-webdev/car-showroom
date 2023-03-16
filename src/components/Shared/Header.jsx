@@ -26,8 +26,13 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link className="text-[#010C3A]" to="/project-docs">
-          Project Docs
+        <Link className="text-[#010C3A]" to="/others-projects">
+          Other Projects
+        </Link>
+      </li>
+      <li>
+        <Link className="text-[#010C3A]" to="/about-me">
+          About Me
         </Link>
       </li>
       <li>
@@ -69,9 +74,9 @@ const Header = () => {
   );
 
   return (
-    <div className="header-area py-3">
+    <div className="header-area bg-[#F3F3FE] py-3">
       <div className="container">
-        <div className="navbar justify-between  bg-base-100">
+        <div className="navbar justify-between bg-[#F3F3FE]">
           <div className="navbar-start max-w-fit">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost md:hidden">

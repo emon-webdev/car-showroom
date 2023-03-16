@@ -18,7 +18,8 @@ import Payment from "../components/Payment";
 import ReportedItems from "../components/ReportedItems";
 import SignIn from "../components/SignUp/SignIn";
 import SignUp from "../components/SignUp/SignUp";
-import ProjectDocs from "../pages/ProjectDocs";
+import About from "../pages/About";
+import OthersProjects from "../pages/OthersProjects";
 import Shops from "../pages/Shops";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
@@ -41,17 +42,26 @@ const router = createBrowserRouter([
         path: "/shops",
         element: <Shops />,
       },
+      // {
+      //   path: "/project-docs",
+      //   element: <ProjectDocs />,
+      // },
       {
-        path: "/project-docs",
-        element: <ProjectDocs />,
+        path: "/others-projects",
+        element: <OthersProjects />,
+      },
+      {
+        path: "/about-me",
+        element: <About />,
       },
       {
         path: "/category/:name",
         element: <CategoryProducts />,
-        loader: ({ params }) =>
-          fetch(
+        loader: ({ params }) => {
+          return fetch(
             `https://car-showroom-server.vercel.app/category/${params.name}`
-          ),
+          );
+        },
       },
       {
         path: "/product-details/:id",

@@ -21,7 +21,7 @@ const AddProduct = () => {
   const time = currentDate.getHours() + ":" + currentDate.getMinutes();
   const date = format(currentDate, "PP");
   // const date = new Date();
-  const categories = ["toyota", "lexus", "bmw"];
+  const categories = ["Mercedes-Benz", "Audi", "BMW", "toyota"];
 
   const handleAddProduct = (data) => {
     const image = data.image[0];
@@ -73,7 +73,7 @@ const AddProduct = () => {
   return (
     <div>
       <div>
-        <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
+        <h2 className="text-center text-[#010c3a] mb-4 text-4xl font-bold">
           Add a New Product
         </h2>
 
@@ -84,7 +84,7 @@ const AddProduct = () => {
                 <label className="label py-1">
                   {" "}
                   <span className="label-text font-semibold text-[#383838] mb-[10px] text-[14px]">
-                    Title
+                    Product Name
                   </span>
                 </label>
                 <input

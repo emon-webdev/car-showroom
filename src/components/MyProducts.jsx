@@ -9,7 +9,7 @@ const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
   const {
-    data: products = [],
+    data: { products, count } = [],
     isLoading,
     refetch,
   } = useQuery({
@@ -22,7 +22,7 @@ const MyProducts = () => {
       return data;
     },
   });
-
+  console.log(products, count)
   if (isLoading) {
     return <Loading />;
   }
@@ -58,14 +58,14 @@ const MyProducts = () => {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto my-12">
-      <h2 className="text-center my-8 text-4xl font-bold">My Products</h2>
-      <h2 className="text-center my-8 text-xl font-bold">
+    <div className="max-w-[1400px] mx-auto">
+      <h2 className="text-center mb-4 text-4xl font-bold">My Products</h2>
+      <h2 className="text-center my-4 text-xl font-bold">
         If you are showing product then you must be added product{" "}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {products.map((product) => (
+      <div className="grid lg:grid-cols-2 xl:grid-cols-4 grid-cols-1 gap-6 mt-12">
+        {products?.map((product) => (
           <SingleProduct
             key={product._id}
             product={product}

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthProvider";
 import PrivateRoute from "../../Routes/PrivateRoute";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const BookModal = ({ booking, bookingData, closeModal }) => {
   const { user } = useContext(AuthContext);
