@@ -22,7 +22,7 @@ const DashbordRoot = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-[55px] bg-[#F1F5F9] flex flex-col">
+        <div className="drawer-content p-[30px] bg-[#F1F5F9] flex flex-col">
           {/* <!-- Page content here --> */}
           <Outlet />
         </div>

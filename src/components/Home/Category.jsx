@@ -13,7 +13,7 @@ const Category = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/categories`
+        `https://car-showroom-server.vercel.app/categories`
       );
       const data = await res.json();
       return data;
@@ -44,7 +44,7 @@ const Category = () => {
                   className="category border border-gray-400"
                 >
                   <div className="text-center">
-                    <h4 className="text-[#010c3a] uppercase text-xl font-semibold mb-3 ">
+                    <h4 className="text-[#010c3a] uppercase text-lg md:text-xl font-semibold mb-3 ">
                       {category?.name}
                     </h4>
                     <div className="icon m-auto">

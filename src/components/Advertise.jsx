@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { ImBullhorn } from "react-icons/im";
 import AdvertisedItems from "./AdvertisedItems";
-import BookModal from "./Home/BookModal";
 import Loading from "./Loading";
+import BookModal from "./ProductPaymentModal/BookModal";
 const Advertise = () => {
   const [bookingData, setBookingData] = useState(null);
   const {

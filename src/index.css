@@ -75,3 +75,9 @@
 .bg__drop {
   @apply bg-white drop-shadow-[0_5px_9px_rgba(0,0,0,0.02)] rounded;
 }
+.input-disabled,
+.input[disabled] {
+  background: #ddd !important;
+  border: #ddd;
+  color: #333 !important;
+}

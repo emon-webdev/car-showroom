@@ -9,25 +9,23 @@ const MyOrders = () => {
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await fetch(`https://car-showroom-server.vercel.app/bookings/${user?.email}`);
+      const res = await fetch(`https://car-showroom-server.vercel.app/bookings?email=${user?.email}`);
       const data = res.json();
       return data;
     },
   });
-
-
   if (isLoading) {
     return <Loading />;
   }
-
+  console.log(bookings)
   return (
-    <div className="max-w-[1400px] mx-auto my-12">
-      <h2 className="text-center text-[#df0303] my-8 text-4xl font-bold">
+    <div className="max-w-[1400px] mx-auto mb-12">
+      <h2 className="text-center text-[#010c3a] mb-4 text-4xl font-bold">
         My Orders
       </h2>
-      <h2 className="text-center my-8 text-xl font-bold">
+      <h2 className="text-center my-4 text-xl font-bold">
         If you are showing orders then you must be Booking{" "}
-        <span className="text-[#df0303]">home - Category - Book now</span> Order{" "}
+        <span className="text-[#010c3a]">home - Category - Book now</span> Order{" "}
       </h2>
 
       <div>
@@ -57,12 +55,20 @@ const MyOrders = () => {
                   <td>{product?.productName}</td>
                   <td>$ {product?.resalePrice}</td>
                   <td>
-                    <Link
-                      to={`/dashboard/payment/${product._id}`}
-                      className="btn btn-success btn-sm"
-                    >
-                      Pay
-                    </Link>
+
+                    {product?.paid ?
+                      product?.resalePrice && product?.paid && <span
+                        className="btn btn-success btn-sm"
+                      >Paid</span>
+
+                      :
+                      <Link
+                        to={`/dashboard/payment/${product.productId}`}
+                        className="btn btn-success btn-sm"
+                      >
+                        Pay
+                      </Link>
+                    }
                   </td>
                 </tr>
               ))}

@@ -133,12 +133,13 @@ const BookModal = ({ booking, bookingData, closeModal }) => {
                   />
                 </div>
                 <div className="modal-action flex justify-start">
-                  <button type="submit" className="primary-btn mr-3">
-                    Submit
-                  </button>
-                  <label onClick={closeModal} className="primary-btn">
+
+                  <label onClick={closeModal} className="btn btn-outline btn-error w-auto rounded">
                     Cancel
                   </label>
+                  <button type="submit" className=" btn btn-active btn-secondary w-auto rounded">
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>

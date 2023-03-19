@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useLoaderData, useNavigation } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import aircon from "../../assets/air-con.svg";
 import bodyType from "../../assets/body-type.svg";
 import driveType from "../../assets/drive-type.svg";
@@ -9,12 +9,14 @@ import fuelType from "../../assets/fuel-type.svg";
 import gearbox from "../../assets/gearbox.svg";
 import mileage from "../../assets/mileage.svg";
 import year from "../../assets/year.svg";
+import BookModal from "../ProductPaymentModal/BookModal";
 
 const ProductDetails = () => {
   const singleProduct = useLoaderData();
+  const [bookingData, setBookingData] = useState(null);
   const { img, _id, sellerImg, sellerName, email, resalePrice } = singleProduct;
-  console.log(singleProduct)
-  const navigation = useNavigation();
+
+  const navigate = useNavigate();
   // report product
   const handleReport = (id) => {
     fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
@@ -28,6 +30,74 @@ const ProductDetails = () => {
       .then((data) => {
         console.log(data);
         toast.error("Successfully report this product");
+      });
+  };
+
+
+  const closeModal = () => {
+    setBookingData(null);
+  };
+
+  const booking = (event) => {
+    event.preventDefault();
+    setBookingData(null);
+    const form = event.target;
+    const productName = form.title.value;
+    const resalePrice = form.resalePrice.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
+    const buyerName = form.buyerName.value;
+    const buyerEmail = form.buyerEmail.value;
+    const meetingLocation = form.meetingLocation.value;
+    const buyerMobile = form.buyerMobile.value;
+    const sellerNumber = form.sellerNumber.value;
+    const productId = form.productId.value;
+
+    const bookingProduct = {
+      productName,
+      resalePrice,
+      sellerName,
+      sellerEmail,
+      buyerName,
+      buyerEmail,
+      meetingLocation,
+      sellerNumber,
+      buyerMobile,
+      productId,
+      sellerImg,
+      img
+    };
+
+    fetch("https://car-showroom-server.vercel.app/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log(data)
+          console.log(navigate)
+          navigate('/dashboard/myOrders');
+          toast.success("Booking Successfully");
+        } else {
+          toast.error(data.message);
+        }
+      });
+
+    // //save product to the database for
+    fetch(`https://car-showroom-server.vercel.app/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ booked: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
       });
   };
 
@@ -165,34 +235,33 @@ const ProductDetails = () => {
                   <span>{email}</span>
                 </div>
               </div>
-              {/* <button className="btn btn-outline btn-error w-full rounded">
-                Report this add
-              </button> */}
               <button
                 onClick={() => handleReport(_id)}
                 className="btn btn-outline btn-error w-full rounded">
-
                 Report
               </button>
 
-              <button className="mt-5 btn btn-active btn-secondary w-full rounded">
-                Book Now!
-              </button>
+              <label
+                htmlFor="book-now"
+                onClick={() => setBookingData(singleProduct)}
+                className="mt-5 btn btn-active btn-secondary w-full rounded"
+              >
+                Book Now
+              </label>
 
-              <label htmlFor="my-modal-3" className="btn">open modal</label>
             </div>
           </div>
         </div>
       </div>
       {/* MOdal content*/}
-      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box relative">
-          <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-          <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
-          <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-        </div>
-      </div>
+
+      {bookingData && (
+        <BookModal
+          bookingData={bookingData}
+          closeModal={closeModal}
+          booking={booking}
+        />
+      )}
     </div>
   );
 };

@@ -1,93 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import DynamicBanner from "../Shared/DynamicBanner";
-import BookModal from "./BookModal";
 
 const CategoryProducts = () => {
   const products = useLoaderData();
-  const [bookingData, setBookingData] = useState(null);
-  const navigation = useNavigation();
-
-  // const {
-  //   data: products = [],
-  //   refetch,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["products"],
-  //   queryFn: async () => {
-  //     const res = await fetch(
-  //       `https://car-showroom-server.vercel.app/products/${category.name}`
-  //     );
-  //     const data = res.json();
-  //     return data;
-  //   },
-  // });
-
-  const closeModal = () => {
-    setBookingData(null);
-  };
-  const booking = (event) => {
-    event.preventDefault();
-    setBookingData(null);
-    const form = event.target;
-    const productName = form.title.value;
-    const resalePrice = form.resalePrice.value;
-    const sellerName = form.sellerName.value;
-    const sellerEmail = form.sellerEmail.value;
-    const buyerName = form.buyerName.value;
-    const buyerEmail = form.buyerEmail.value;
-    const meetingLocation = form.meetingLocation.value;
-    const buyerMobile = form.buyerMobile.value;
-    const sellerNumber = form.sellerNumber.value;
-    const productId = form.productId.value;
-
-    const bookingProduct = {
-      productName,
-      resalePrice,
-      sellerName,
-      sellerEmail,
-      buyerName,
-      buyerEmail,
-      meetingLocation,
-      sellerNumber,
-      buyerMobile,
-      productId,
-    };
-    console.log(bookingProduct);
-
-    fetch("https://car-showroom-server.vercel.app/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast.success("Booking Successfully");
-        } else {
-          toast.error(data.message);
-        }
-      });
-
-    //save product to the database for
-    fetch(`https://car-showroom-server.vercel.app/products/${productId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ booked: true }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // refetch();
-        window.location.reload();
-      });
-  };
 
   const handleReport = (id) => {
     fetch(`https://car-showroom-server.vercel.app/products/${id}`, {
@@ -104,19 +22,11 @@ const CategoryProducts = () => {
       });
   };
 
-  // if (navigation.state === "loading" || isLoading) {
-  //   return <Loading></Loading>;
-  // }
 
   return (
     <>
       <DynamicBanner title="Category Products" />
       <div className="container mb-12">
-        {/* <h1 className="text-5xl my-8 font-bold text-center">
-          <span className="text-[#df0303]">
-            Item Wise Same Category Products
-          </span>
-        </h1> */}
 
         <>
           {products.length ? (
@@ -167,15 +77,12 @@ const CategoryProducts = () => {
                       <p>Original Price: {categoryProduct.originalPrice}</p>
                       <p>Resale Price: {categoryProduct.resalePrice}</p>
                       <p>Use: {categoryProduct.uses} year/month</p>
-                      <p>status: {categoryProduct.status}</p>
-                      <p>Relevant Info: {categoryProduct.relevantInfo}</p>
-                      <p>{categoryProduct.description}</p>
 
                       <div
                         className="card-actions "
                         style={{
                           display: "grid",
-                          gridTemplateColumns: "repeat(3, 1fr)",
+                          gridTemplateColumns: "repeat(2, 1fr)",
                         }}
                       >
                         <button
@@ -184,13 +91,6 @@ const CategoryProducts = () => {
                         >
                           Report
                         </button>
-                        <label
-                          htmlFor="book-now"
-                          onClick={() => setBookingData(categoryProduct)}
-                          className="btn btn-outline btn-primary w-full rounded"
-                        >
-                          Book Now
-                        </label>
                         <Link
                           to={`/product-details/${categoryProduct._id}`}
                           className="btn btn-outline btn-primary w-full rounded"
@@ -226,14 +126,7 @@ const CategoryProducts = () => {
           )}
         </>
 
-        {/* MOdal content*/}
-        {bookingData && (
-          <BookModal
-            bookingData={bookingData}
-            closeModal={closeModal}
-            booking={booking}
-          />
-        )}
+
       </div>
     </>
   );

@@ -22,7 +22,6 @@ const MyProducts = () => {
       return data;
     },
   });
-  console.log(products, count)
   if (isLoading) {
     return <Loading />;
   }
