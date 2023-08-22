@@ -13,7 +13,7 @@ const CheckoutForm = ({ booking }) => {
 
 
     const [clientSecret, setClientSecret] = useState("");
-
+    console.log(buyerMobile)
 
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const CheckoutForm = ({ booking }) => {
             .then((data) => {
                 setClientSecret(data.clientSecret)
             });
-    }, []);
+    }, [resalePrice]);
 
 
     const handleSubmit = async (event) => {

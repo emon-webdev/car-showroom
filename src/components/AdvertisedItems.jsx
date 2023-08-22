@@ -10,7 +10,7 @@ const AdvertisedItems = ({ advertise, setBookingData }) => {
     date,
     category,
     resalePrice,
-    verifyUser,
+    // verifyUser,
     sellerImg,
     sellerName,
     img,

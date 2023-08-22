@@ -29,7 +29,7 @@ const Shops = () => {
   const handleSearch = () => {
     setSearch(searchRef.current.value);
   };
-
+  console.log(handleSearch)
   // const {
   //   data: { products, count } = [],
   //   refetch,
