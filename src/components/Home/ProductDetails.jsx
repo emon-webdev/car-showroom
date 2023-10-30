@@ -19,7 +19,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   // report product
   const handleReport = (id) => {
-    fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
+    fetch(`${process.env.VITE_APP_API_URL}/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

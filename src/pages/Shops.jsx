@@ -29,25 +29,7 @@ const Shops = () => {
   const handleSearch = () => {
     setSearch(searchRef.current.value);
   };
-  console.log(handleSearch)
-  // const {
-  //   data: { products, count } = [],
-  //   refetch,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["products"],
-  //   queryFn: async () => {
-  //     const res = await fetch(`https://car-showroom-server.vercel.app/products`);
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
 
-  // if (isLoading) {
-  //   <div className="flex justify-center items-center">
-  //     <div className="w-16 text-center h-16 border-4 border-dashed rounded-full animate-spin border-violet-800"></div>
-  //   </div>;
-  // }
 
   return (
     <div>

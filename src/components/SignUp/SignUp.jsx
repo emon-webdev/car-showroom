@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import DynamicBanner from "../Shared/DynamicBanner";
+
 const SignUp = () => {
   const {
     register,
@@ -14,14 +15,17 @@ const SignUp = () => {
     useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   // const [createdUserEmail, setCreatedUserEmail] = useState("");
-  const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
   const navigate = useNavigate();
+  // const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
+  // console.log(imageHostKey)
+
 
   const handleSignUp = (data) => {
+    console.log(data)
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=460b8c52cb6d0d028c77ba6a46df812e`;
     fetch(url, {
       method: "POST",
       body: formData,
@@ -30,10 +34,10 @@ const SignUp = () => {
       .then((imgData) => {
         console.log(imgData)
         if (imgData.success) {
+
           setSignUPError("");
           createUser(data.email, data.password)
             .then((result) => {
-              const user = result.user;
               toast.success("Sign up Successful")
               const userInfo = {
                 displayName: data.name,

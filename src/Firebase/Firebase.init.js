@@ -13,13 +13,24 @@ import { initializeApp } from "firebase/app";
 //   appId: process.env.REACT_APP_appId,
 // };
 
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyD4z9HxhVGgNedHY-f8lQOdp3sLVZToVsM",
+//   authDomain: "car-showroom-520ff.firebaseapp.com",
+//   projectId: "car-showroom-520ff",
+//   storageBucket: "car-showroom-520ff.appspot.com",
+//   messagingSenderId: "185041252292",
+//   appId: "1:185041252292:web:cb7319f7faaaf77e92fe91"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyD4z9HxhVGgNedHY-f8lQOdp3sLVZToVsM",
-  authDomain: "car-showroom-520ff.firebaseapp.com",
-  projectId: "car-showroom-520ff",
-  storageBucket: "car-showroom-520ff.appspot.com",
-  messagingSenderId: "185041252292",
-  appId: "1:185041252292:web:cb7319f7faaaf77e92fe91"
+  apiKey: "AIzaSyDMZJzeaUJ7ONIFHeEkzIMpCbqAUDAKmak",
+  authDomain: "car-resell-web.firebaseapp.com",
+  projectId: "car-resell-web",
+  storageBucket: "car-resell-web.appspot.com",
+  messagingSenderId: "916007609266",
+  appId: "1:916007609266:web:2b8d4e6eb9631c6b767aab",
+  measurementId: "G-RGF6FCHCVW"
 };
 
 // Initialize Firebase
